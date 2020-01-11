@@ -20,77 +20,77 @@ entries:
     output: web, pdf
     folderitems:
     - title: A simple barchart
-      url: /simplest-barchart.html
+      url: /vegalite-simplest-barchart.html
       output: web, pdf
     - title: Vega-Lite online editor
-      url: /vegalite-online-editor.html
+      url: /vegalite-vegalite-online-editor.html
       output: web, pdf
     - title: Setting colour and shape
-      url: /setting-colour-and-shape.html
+      url: /vegalite-setting-colour-and-shape.html
       output: web, pdf
     - title: Changing the data
-      url: /changing-the-data.html
+      url: /vegalite-changing-the-data.html
       output: web, pdf
   - title: Data transformations
     output: web, pdf
     folderitems:
       - title: Creating data transformations
-        url: /data-transformations.html
+        url: /vegalite-data-transformations.html
         output: web, pdf
   - title: Composing plots
-    url: /composing-plots.html
+    url: /vegalite-composing-plots.html
     output: web, pdf
     folderitems:
     - title: Facetting
-      url: /facetting.html
+      url: /vegalite-facetting.html
       output: web, pdf
     - title: Placing views side-by-side
-      url: /placing-views-side-by-side.html
+      url: /vegalite-placing-views-side-by-side.html
       output: web, pdf
   - title: Interacting with the images
-    url: /interaction.html
+    url: /vegalite-interaction.html
     output: web, pdf
     folderitems:
     - title: Tooltips
-      url: /tooltips.html
+      url: /vegalite-tooltips.html
       output: web, pdf
     - title: Selecting datapoints
-      url: /selecting-datapoints.html
+      url: /vegalite-selecting-datapoints.html
       output: web, pdf
     - title: Zooming and panning
-      url: /zooming-and-panning.html
+      url: /vegalite-zooming-and-panning.html
       output: web, pdf
     - title: Brushing and linking
-      url: /brushing-and-linking.html
+      url: /vegalite-brushing-and-linking.html
       output: web, pdf
       subfolderitems:
       - title: Equivalent plots
-        url: /equivalent-plots.html
+        url: /vegalite-equivalent-plots.html
         output: web, pdf
       - title: Non-equivalent plots
-        url: /non-equivalent-plots.html
+        url: /vegalite-non-equivalent-plots.html
         output: web, pdf
     - title: Focus & context plots
-      url: /focus-and-context-plots.html
+      url: /vegalite-focus-and-context-plots.html
       output: web, pdf
     - title: A scatterplot matrix
-      url: /a-scatterplot-matrix.html
+      url: /vegalite-a-scatterplot-matrix.html
       output: web, pdf
   - title: Using widgets for selections
     output: web, pdf
     folderitems:
     - title: Using widgets for selections
-      url: /using-widgets-for-selection.html
+      url: /vegalite-using-widgets-for-selection.html
       output: web
   - title: Further exercises
     output: web, pdf
     folderitems:
       - title: Further exercises
-        url: /further-exercises.html
+        url: /vegalite-further-exercises.html
         output: web, pdf
   - title: Where next?
     output: web, pdf
     folderitems:
     - title: Where next?
-      url: /where-next.html
+      url: /vegalite-where-next.html
       output: web, pdf

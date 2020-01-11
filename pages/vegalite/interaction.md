@@ -2,7 +2,7 @@
 title: Interaction
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: interaction.html
+permalink: vegalite-interaction.html
 folder: vega-lite
 ---
 Test

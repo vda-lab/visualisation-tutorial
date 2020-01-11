@@ -2,7 +2,7 @@
 title: Selecting datapoints
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: selecting-datapoints.html
+permalink: vegalite-selecting-datapoints.html
 folder: vega-lite
 ---
 In many cases you will want to do something more than just show a tooltip for a single datapoint, but for example select one or multiple datapoints and change their encoding, or use them to filter a different plot.

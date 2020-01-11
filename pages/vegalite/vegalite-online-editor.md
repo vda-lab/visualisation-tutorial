@@ -2,7 +2,7 @@
 title: Vega-Lite online editor
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: vegalite-online-editor.html
+permalink: vegalite-vegalite-online-editor.html
 folder: vega-lite
 ---
 ![vegalite-online-editor]({{ site.baseurl }}/assets/vegalite-online-editor.png)

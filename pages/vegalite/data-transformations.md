@@ -2,7 +2,7 @@
 title: Data transformations
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: data-transformations.html
+permalink: vegalite-data-transformations.html
 folder: vega-lite
 ---
 Sometimes we'll want to do some calculations on the data before we actually visualise them. For example, we want to make a barchart that shows the average miles per gallon for each number of cylinders. Basically, we'll have to add a `transform` part to our specification:

@@ -2,7 +2,7 @@
 title: Setting colour and shape
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: setting-colour-and-shape.html
+permalink: vegalite-setting-colour-and-shape.html
 folder: vega-lite
 ---
 All our plots have used steelblue marks, but it'd be nice to use a different colour. We can do this in two ways, either specifying it within the `mark`, or within the `encoding`.

@@ -3,7 +3,7 @@ title: Vega-Lite
 keywords: vegalite
 sidebar: vegalite_sidebar
 toc: false
-permalink: vegalite_landing_page.html
+permalink: vegalite-vegalite_landing_page.html
 folder: vegalite
 ---
 ![vega-lite]({{ site.baseurl }}/assets/vega-lite.png)

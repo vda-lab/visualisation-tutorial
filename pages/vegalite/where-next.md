@@ -2,7 +2,7 @@
 title: Where next?
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: where-next.html
+permalink: vegalite-where-next.html
 folder: vega-lite
 ---
 To dig deeper into vega-lite, I suggest you take some time to explore the documentation. There are many additional things you can do that we didn't touch upon here.

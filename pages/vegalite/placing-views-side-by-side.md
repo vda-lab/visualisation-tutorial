@@ -2,7 +2,7 @@
 title: Placing views side-by-side
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: placing-views-side-by-side.html
+permalink: vegalite-placing-views-side-by-side.html
 folder: vega-lite
 ---
 You can also take more control of which plots are put side by side, by using `concat`, `hconcat` or `vconcat`. This pragma can contain a list of objects with `mark` and `encoding` pairs:

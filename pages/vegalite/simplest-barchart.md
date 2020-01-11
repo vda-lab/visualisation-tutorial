@@ -2,7 +2,7 @@
 title: The simplest barchart
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: simplest-barchart.html
+permalink: vegalite-simplest-barchart.html
 folder: vega-lite
 ---
 Here's a _very_ simple barchart defined in vega-lite.

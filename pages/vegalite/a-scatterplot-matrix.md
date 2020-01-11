@@ -2,7 +2,7 @@
 title: A scatterplot matrix
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: a-scatterplot-matrix.html
+permalink: /vegalite-a-scatterplot-matrix.html
 folder: vega-lite
 ---
 We've now seen how to do brushing and linking across different plots. One of the typical use cases is the scatterplot matrix. Based on what we've seen above, we can already create this, just by adding specifications to the `concat` section.

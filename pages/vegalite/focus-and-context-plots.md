@@ -2,7 +2,7 @@
 title: Focus and context plots
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: focus-and-context-plots.html
+permalink: vegalite-focus-and-context-plots.html
 folder: vega-lite
 ---
 Knowing how we can select/brush part of a dataset, and that we can bind these selections to a scale, we can make focus/context plots.

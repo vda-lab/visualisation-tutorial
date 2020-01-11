@@ -2,7 +2,7 @@
 title: Using widgets for selection
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: using-widgets-for-selection.html
+permalink: vegalite-using-widgets-for-selection.html
 folder: vega-lite
 ---
 ### Using widgets for selection

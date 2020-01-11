@@ -2,7 +2,7 @@
 title: Facetting
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: facetting.html
+permalink: vegalite-facetting.html
 folder: vega-lite
 ---
 We could already look at for example acceleration versus miles per gallon with year as colour to get a feeling of how things change over time. Another option, is to have a single plot per year.

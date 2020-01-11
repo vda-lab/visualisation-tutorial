@@ -2,7 +2,7 @@
 title: Brushing and linking
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: brushing-and-linking.html
+permalink: vegalite-brushing-and-linking.html
 folder: vega-lite
 ---
 Knowing how to make selections and how to make side-by-side views, we have all ingredients to create some linked-brushing plots.

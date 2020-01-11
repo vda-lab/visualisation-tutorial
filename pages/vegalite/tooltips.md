@@ -2,7 +2,7 @@
 title: Tooltips
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: tooltips.html
+permalink: vegalite-tooltips.html
 folder: vega-lite
 ---
 The easiest - but still very useful - interaction you can create for a plot is to show a tooltip on hover. This is straightforward, but just adding the `tooltip` key in the `encoding` section:

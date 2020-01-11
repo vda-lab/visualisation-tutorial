@@ -2,7 +2,7 @@
 title: Zooming and panning
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: zooming-and-panning.html
+permalink: vegalite-zooming-and-panning.html
 folder: vega-lite
 ---
 Using the `interval` selection type, we can actually make a plot zoomable and pannable by binding is to the scales.

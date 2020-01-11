@@ -2,7 +2,7 @@
 title: Changing the data
 keywords: vegalite
 sidebar: vegalite_sidebar
-permalink: changing-the-data.html
+permalink: vegalite-changing-the-data.html
 folder: vega-lite
 ---
 If your dataset is a bit bigger than what you see here, it'll become cumbersome to type this into the specification. It's often better to load your data from an external source. Looking at the [documentation](https://vega.github.io/vega-lite/docs/data.html) we see that data can be inline, or loaded from a URL. There is also something called "Named data sources", but we won't look into that.
