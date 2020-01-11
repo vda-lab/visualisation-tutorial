@@ -153,7 +153,7 @@ As another example, let's create a histogram of the miles per gallon. Looking at
 }
 ```
 
-The only thing to do was to add `"bin": true` to the field that you want to bin, and `"aggregate": "count"` to the other dimension. However, this approach is not very flexible, and for any use that is not this straightforwards you will have to define the binning as a `transform` instead, like this:
+The only thing to do was to add `"bin": true` to the field that you want to bin, and `"aggregate": "count"` to the other dimension. However, this approach is not very flexible, and for any use that is not this straightforward you will have to define the binning as a `transform` instead, like this:
 
 ```json
 {

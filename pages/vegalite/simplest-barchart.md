@@ -61,4 +61,4 @@ The keys in the example above are `data`, `mark` and `encoding`. On the document
 
 - `data`: either lists the data that will be used, or provides a link to an external source
 - `mark`: tells us what type of visual we want. In this case, we want bars. These can be `area`, `bar`, `circle`, `line`, `point`, `rect`, `rule`, `square`, `text`, `tick` and `geoshape`.
-- `encoding`: links marks to data tells us how to link the data to the marks.
+- `encoding`: tells us how to link the data to the marks.

@@ -5,7 +5,7 @@ sidebar: vegalite_sidebar
 permalink: vegalite-setting-colour-and-shape.html
 folder: vega-lite
 ---
-All our plots have used steelblue marks, but it'd be nice to use a different colour. We can do this in two ways, either specifying it within the `mark`, or within the `encoding`.
+In all our plots the marks had a steelblue colour, but it'd be nice to use a different colour. We can do this in two ways, either specifying it within the `mark`, or within the `encoding`.
 
 To change colour at the `mark` level, we have to provide the mark with an _object_, instead of just the _string_ "point", "circle" or whatever.
 ```json
