@@ -10,7 +10,7 @@ topnav:
 topnav_dropdowns:
 - title: Topnav dropdowns
   folders:
-    - title: Products
+    - title: Tutorials
       folderitems:
         - title: Vega-lite
           url: /vegalite_landing_page.html
