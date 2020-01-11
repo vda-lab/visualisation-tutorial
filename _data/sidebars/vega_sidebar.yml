@@ -110,3 +110,15 @@ entries:
     - title: Brushing and linking
       url: vega-brushing-and-linking.html
       output: web, pdf
+  - title: Debugging
+    output: web, pdf
+    folderitems:
+    - title: Debugging
+      url: vega-debugging.html
+      output: web, pdf
+  - title: Further exercises
+    output: web, pdf
+    folderitems:
+    - title: Further exercises
+      url: vega-further-exercises.html
+      output: web, pdf
