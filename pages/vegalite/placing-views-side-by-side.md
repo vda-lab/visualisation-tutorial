@@ -7,7 +7,7 @@ folder: vega-lite
 ---
 You can also take more control of which plots are put side by side, by using `concat`, `hconcat` or `vconcat`. This pragma can contain a list of objects with `mark` and `encoding` pairs:
 
-{% highlight text %}
+```text
 {
   "data": ...,
   "hconcat": [
@@ -25,11 +25,11 @@ You can also take more control of which plots are put side by side, by using `co
     }
   ]
 }
-{% endhighlight %}
+```
 
 For example:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "title": "Side-by-side plots",
@@ -59,7 +59,7 @@ For example:
     }
   ]
 }
-{% endhighlight %}
+```
 
 Do not forget to put each `mark` - `encoding` pair within curly brackets! The above specification should give you the following image:
 

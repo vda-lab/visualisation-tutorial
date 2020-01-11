@@ -12,7 +12,7 @@ We've now seen how to do brushing and linking across different plots. One of the
 
 When doing the exercise, you'll notice that there is a lot of repetition, as the `selection`, `marks` and `encoding` are repeated for each plot. For this use case, vega-lite provides the `repeat` keyword. It allows you to extract the variable part of the specification into a separate array. When you do this, you'll have to put the `selection`, `marks` and `encoding` within a separate `spec` again.
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "title": "Scatterplot matrix",
@@ -41,7 +41,7 @@ When doing the exercise, you'll notice that there is a lot of repetition, as the
     }
   }
 }
-{% endhighlight %}
+```
 
 This will give you this image. Try selecting a group of datapoints.
 

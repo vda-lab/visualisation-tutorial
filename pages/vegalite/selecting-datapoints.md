@@ -18,7 +18,7 @@ By default, all datapoints are selected. You can change this by setting `empty` 
 
 We'll add a conditional encoding to make clear which points are selected and which are not. For the documentation on conditional formatting, see [https://vega.github.io/vega-lite/docs/condition.html](https://vega.github.io/vega-lite/docs/condition.html). See the code below how to make the colour conditional on a selection: lightgrey by default, but red if the datapoint is selected.
 
-{% highlight json %}
+```json
 {
   "title": "Making selections",
   "data": {
@@ -40,7 +40,7 @@ We'll add a conditional encoding to make clear which points are selected and whi
     }
   }
 }
-{% endhighlight %}
+```
 
 This will give you the image below. Try dragging your mouse.
 

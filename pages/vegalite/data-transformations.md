@@ -7,14 +7,14 @@ folder: vega-lite
 ---
 Sometimes we'll want to do some calculations on the data before we actually visualise them. For example, we want to make a barchart that shows the average miles per gallon for each number of cylinders. Basically, we'll have to add a `transform` part to our specification:
 
-{% highlight json %}
+```json
 {
   "data": ...,
   "transform": ...,
   "mark": ...,
   "encoding": ...
 }
-{% endhighlight %}
+```
 
 There is extensive documentation available for these transforms at [https://vega.github.io/vega-lite/docs/transform.html](https://vega.github.io/vega-lite/docs/transform.html). Possible transformations that we can apply are: aggregate, bin, calculate, density, filter, flatten, fold, impute, join aggregate, lookup, pivot, quantile, regression and loess regression, sample, stack, time unit, and window.
 
@@ -26,7 +26,7 @@ In the case of _filtering_, it is quite clear what will happen: only the objects
 - `range`
 - `oneOf`
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -44,7 +44,7 @@ In the case of _filtering_, it is quite clear what will happen: only the objects
     "size": {"value": 20}
   }
 }
-{% endhighlight %}
+```
 
 Another option is to use a filter like this: `{"filter": "datum.Cylinders <= 5"}` where `datum` stands for a single object, and `.Cylinders` will get the value for that property.
 
@@ -56,7 +56,7 @@ A filter does not change the data objects itself. This is different for many oth
 
 What does this do? _This effectively adds a new field to each object, called `yearonly`_. We can now use this new field as any other.
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -72,14 +72,14 @@ What does this do? _This effectively adds a new field to each object, called `ye
     "color": {"field": "yearonly", "type": "ordinal"}
   }
 }
-{% endhighlight %}
+```
 
 {:.exercise}
 **Exercise** - Create an image that plots the original `Year` versus the new `yearonly`.
 
 So with calculations, we get an additional field. What if we want to _aggregate_? Let's go back to our initial question: we want to have a barchart that shows the average miles per gallon for each number of cylinders. Below is the specification:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -101,7 +101,7 @@ So with calculations, we get an additional field. What if we want to _aggregate_
     "y": {"field": "mean_acc", "type": "quantitative"}
   }
 }
-{% endhighlight %}
+```
 
 In the documentation, we see that `aggregate` takes a `AggregatedFieldDef[]`, and `groupby` takes a `String[]`. The `[]` after each of these indicates that they should be _arrays_, not single values. That is why we use `"aggregate": [{...}]` instead of `"aggregate": {...}` and `"groupby": ["Cylinders"]` instead of `"groupby": "Cylinders"`.
 
@@ -139,7 +139,7 @@ In the documentation, we see that `aggregate` takes a `AggregatedFieldDef[]`, an
 
 As another example, let's create a histogram of the miles per gallon. Looking at the documentation at [https://vega.github.io/vega-lite/docs/bin.html](https://vega.github.io/vega-lite/docs/bin.html), it seems that the easiest way to do this is to do this in the `encoding` section:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -151,11 +151,11 @@ As another example, let's create a histogram of the miles per gallon. Looking at
     "y": {"aggregate": "count", "type": "quantitative"}
   }
 }
-{% endhighlight %}
+```
 
 The only thing to do was to add `"bin": true` to the field that you want to bin, and `"aggregate": "count"` to the other dimension. However, this approach is not very flexible, and for any use that is not this straightforwards you will have to define the binning as a `transform` instead, like this:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -171,11 +171,11 @@ The only thing to do was to add `"bin": true` to the field that you want to bin,
     "y": {"aggregate": "count", "type": "quantitative"}
   }
 }
-{% endhighlight %}
+```
 
 When defining `bin` in a transform, it will create two new fields for each object: `binned_mpg` and `binned_mpg_end`. These indicate the boundaries of the bin that that object fits into. For example, the object
 
-{% highlight json %}
+```json
 {
    "Name":"chevrolet chevelle malibu",
    "Miles_per_Gallon":18,
@@ -187,11 +187,11 @@ When defining `bin` in a transform, it will create two new fields for each objec
    "Year":"1970-01-01",
    "Origin":"USA"
 }
-{% endhighlight %}
+```
 
 becomes
 
-{% highlight json %}
+```json
 {
    "Name":"chevrolet chevelle malibu",
    "Miles_per_Gallon":18,
@@ -205,11 +205,11 @@ becomes
    "binned_mpg": 15,
    "binned_mpg_end": 20
 }
-{% endhighlight %}
+```
 
 Yet another way of creating a histogram is to work with two transforms: one to bin the data, and one to count the number of elements in the bin. This basically takes the output of the binning transform (i.e. the new `binned_mpg` field from above) and calculates the count on that. This way, the encoding is simpler to understand and we don't have to do magic incantations within the definition of `x` and `y`.
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -232,7 +232,7 @@ Yet another way of creating a histogram is to work with two transforms: one to b
     "y": {"field": "count_mpg", "type": "quantitative"}
   }
 }
-{% endhighlight %}
+```
 
 <img src="{{ site.baseurl }}/assets/vegalite-histogram.png" width="50%" />
 

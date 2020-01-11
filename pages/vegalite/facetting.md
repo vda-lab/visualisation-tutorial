@@ -33,7 +33,7 @@ We can make a small-multiples plot with acceleration versus mpg, with a separate
 
 Just like with colour and shape described above, these facets can be defined in different places. The easiest will be `"column": {"field": "yearonly", "type": "ordinal"}` in the `encoding` section as below.
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -50,7 +50,7 @@ Just like with colour and shape described above, these facets can be defined in 
     "column": {"field": "yearonly", "type": "ordinal"}
   }
 }
-{% endhighlight %}
+```
 
 This will give you the following image:
 
@@ -58,7 +58,7 @@ This will give you the following image:
 
 Alternatively, you can define the facet at a higher level. According to the documentation, "to create a faceted view, define how the data should be faceted in facet and how each facet should be displayed in the spec." This adaptation we need to make is a bit different than what we did before, as we have to wrap the `mark` and `encoding` within a separate `spec` section:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -76,4 +76,4 @@ Alternatively, you can define the facet at a higher level. According to the docu
     }
   }
 }
-{% endhighlight %}
+```

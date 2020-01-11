@@ -11,7 +11,7 @@ For the exercises below, we will use the New York City citibike data available f
 
 We made a (small) part of the data available [here](https://raw.githubusercontent.com/vda-lab/vda-lab.github.io/master/assets/station_366.json). It concerns trip data from November 2011, where the trip started or ended in station nr 336. The fields in each record (with example data) look like this:
 
-{% highlight json %}
+```json
 {
   "tripduration": 1217,
   "starttime": "2019-11-01 06:03:28.5390",
@@ -29,7 +29,7 @@ We made a (small) part of the data available [here](https://raw.githubuserconten
   "birthyear": 1964,
   "gender": 1
 }
-{% endhighlight json %}
+```
 
 {:.exercise}
 **Exercise**: Make a plot showing how the trip duration is related to the hour of the day. You could colour by usertype. You'll see that your plot will be compressed because of some very long durations, so only use the trips that have a duration of less than 5,000.

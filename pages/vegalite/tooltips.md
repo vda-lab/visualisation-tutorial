@@ -7,7 +7,7 @@ folder: vega-lite
 ---
 The easiest - but still very useful - interaction you can create for a plot is to show a tooltip on hover. This is straightforward, but just adding the `tooltip` key in the `encoding` section:
 
-{% highlight json %}
+```json
 {
   "title": "Showing a tooltip on hover",
   "data": {
@@ -24,7 +24,7 @@ The easiest - but still very useful - interaction you can create for a plot is t
     ]
   }
 }
-{% endhighlight %}
+```
 
 This will get you the following behaviour (interactive):
 

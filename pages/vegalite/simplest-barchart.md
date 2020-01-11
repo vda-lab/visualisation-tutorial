@@ -35,7 +35,7 @@ Here's a _very_ simple barchart defined in vega-lite.
 
 The code to generate it:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "description": "A simple bar chart with embedded data.",
@@ -53,7 +53,7 @@ The code to generate it:
     "y": {"field": "a", "type": "nominal"}
   }
 }
-{% endhighlight %}
+```
 
 What do we see in this code (called the _specification_ for this plot)? The `"$schema"` key indicates what version of vega-lite (or vega) we are using. Always provide this, but we won't mention it further in this tutorial.
 

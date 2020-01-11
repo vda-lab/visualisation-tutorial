@@ -9,7 +9,7 @@ Using the `interval` selection type, we can actually make a plot zoomable and pa
 
 A simple example:
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
@@ -27,7 +27,7 @@ A simple example:
     "color": { "value": "lightgrey" }
   }
 }
-{% endhighlight %}
+```
 
 <div id="vis4"></div>
 <script type="text/javascript">

@@ -56,7 +56,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
 <img src="{{ site.baseurl }}/assets/vega-focuscontext.png" width="50%"/>
 -->
 
-{% highlight json %}
+```json
 { "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "data": {
     "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/sp500.csv"
@@ -93,4 +93,4 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
     }
   }]
 }
-{% endhighlight %}
+```

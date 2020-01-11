@@ -9,26 +9,26 @@ If your dataset is a bit bigger than what you see here, it'll become cumbersome 
 
 What we've done above is provide the data inline. In that case, you need the `values` key, e.g.
 
-{% highlight json %}
+```json
 "data": {
   "values": [
     {"a": "A", "b": 28},
     {"a": "B", "b": 55}
   ]
 }
-{% endhighlight %}
+```
 
 When loading external data, we'll need the `url` key instead:
 
-{% highlight json %}
+```json
 "data": {
   "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
 }
-{% endhighlight %}
+```
 
 This cars dataset is one of the standard datasets used for learning data visualisation. The json file at the URL looks like this:
 
-{% highlight json %}
+```json
 [
    {
       "Name":"chevrolet chevelle malibu",
@@ -46,12 +46,13 @@ This cars dataset is one of the standard datasets used for learning data visuali
       "Miles_per_Gallon":15,
       "Cylinders":8,
       "Displacement":350,
-...
-{% endhighlight %}
+      ...}
+]
+```
 
 So it is an _array_ (`[]`) of _objects_ (`{}`) where each object is a car for which we have a name, miles per gallon, cylinders, etc.
 
 {:.exercise}
 **Exercise 5**: Alter the specification in the vega-lite editor to recreate this image:
 
-<img src="{{ site.baseurl }}/assets/vegalite-cars-accelerationbympg.png" width="50%" />
+<img src="{{ site.baseurl }}/assets/vegalite-cars-accelerationbympg.png" width="30%" />

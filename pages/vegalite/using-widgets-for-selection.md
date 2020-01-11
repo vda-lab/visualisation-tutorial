@@ -8,7 +8,7 @@ folder: vega-lite
 ### Using widgets for selection
 We can also use HTML widgets to create selections. For this we'll bind an HTML input element to a data field. In the example below, we create a
 
-{% highlight json %}
+```json
 {
   "title": "Making selections",
   "data": {
@@ -34,7 +34,7 @@ We can also use HTML widgets to create selections. For this we'll bind an HTML i
     }
   }
 }
-{% endhighlight %}
+```
 
 The result is a selection box that we can use to filter the data:
 
@@ -74,15 +74,15 @@ The result is a selection box that we can use to filter the data:
 
 This code is exactly the same as above in the example for "Selecting datapoints"; only the `selection` section is replaced from
 
-{% highlight json %}
+```json
 "selection": {
   "my_selection": {"type": "interval", "empty": "none"}
 },
-{% endhighlight %}
+```
 
 to
 
-{% highlight json %}
+```json
 "selection": {
   "my_selection": {
     "type": "single",
@@ -90,11 +90,11 @@ to
     "bind": {"input": "select", "options": [null, "Europe", "Japan", "USA"]}
   }
 },
-{% endhighlight %}
+```
 
 We can also combine different selections, by using the `and` key and providing an array of selectors.
 
-{% highlight json %}
+```json
 "color": {
   "condition": {
     "selection": {"and": ["my_first_selection","my_second_selection"]},
@@ -102,7 +102,7 @@ We can also combine different selections, by using the `and` key and providing a
   },
   "value": "lightgrey"
 }
-{% endhighlight %}
+```
 
 {:.exercise}
 **Exercise** - Create a plot like the one above, but with 2 dropdown boxes: one for number of cylinders, and one for origin. All points should be lightgrey, _unless_ they comply to both criteria.
@@ -112,7 +112,7 @@ We can also combine different selections, by using the `and` key and providing a
 
 Another way of combining two filters, is to put them both in the `bind` section:
 
-{% highlight json %}
+```json
 "selection": {
   "my_selection": {
     "type": "single",
@@ -122,7 +122,7 @@ Another way of combining two filters, is to put them both in the `bind` section:
       "Cylinders": {"input": "select", "options": [null, 2,3,4,5,6,7,8]}
   }
 },
-{% endhighlight %}
+```
 
 ### Types of widgets
 There is more than just the dropdown widget. Here are the options:

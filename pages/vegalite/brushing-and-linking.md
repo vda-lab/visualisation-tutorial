@@ -15,7 +15,7 @@ Notice that:
 - We define `selection` in the first plot.
 - We use that selection in both plots.
 
-{% highlight json %}
+```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "title": "Brushing and linking",
@@ -56,7 +56,7 @@ Notice that:
     }
   ]
 }
-{% endhighlight %}
+```
 
 The result:
 
@@ -208,7 +208,7 @@ As we saw earlier, we can create histograms using transforms. Let's create a sca
 
 We only have to replace the `circle` marks of the second plot as we had before, with the histogram code:
 
-{% highlight json %}
+```json
 ...
 {
   "selection": {
@@ -228,4 +228,4 @@ We only have to replace the `circle` marks of the second plot as we had before, 
   }
 }
 ...
-{% endhighlight %}
+```

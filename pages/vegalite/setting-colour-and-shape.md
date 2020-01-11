@@ -8,15 +8,15 @@ folder: vega-lite
 All our plots have used steelblue marks, but it'd be nice to use a different colour. We can do this in two ways, either specifying it within the `mark`, or within the `encoding`.
 
 To change colour at the `mark` level, we have to provide the mark with an _object_, instead of just the _string_ "point", "circle" or whatever.
-{% highlight json %}
+```json
 ...
 "mark": {"type": "point", "color": "red"},
 ...
-{% endhighlight %}
+```
 
 To change colour at the `encoding` level, but we cannot just say `"color": "red"`. The `color` key takes an _object_ as its value. For a fixed value (i.e. "red"), this should be `{"value": "red"}`.
 
-{% highlight json %}
+```json
 ...
 "mark": "point",
 "encoding": {
@@ -25,13 +25,13 @@ To change colour at the `encoding` level, but we cannot just say `"color": "red"
   "color": {"value": "red"}
 }
 ...
-{% endhighlight %}
+```
 
 {:.exercise}
 **Exercise** - Check what happens if you provide a colour both at the mark level and at the encoding level.
 
 One of the cool things when defining colour in the encoding, is that we can let it be dependent upon the data as well. Instead of using `{"value": ...}`, we can use `{"field": ...}`.
-{% highlight json %}
+```json
 ...
 "mark": "point",
 "encoding": {
@@ -40,7 +40,7 @@ One of the cool things when defining colour in the encoding, is that we can let 
   "color": {"field": "a", "type": "nominal"}
 }
 ...
-{% endhighlight %}
+```
 
 You'll see that the colour now depends on the data as well! Of course, in our data every single object has a different value for `a` (i.e. `A`, `B`, ...). Let's just change our data a bit so that we only have a limited number of classes. Our output might look something like this:
 
