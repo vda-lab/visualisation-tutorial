@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-composing-plots.html
 folder: vega
+series: vega-series
+weight: 17
 ---
 Remember in vega-lite that we could create composed plots by using `concat`, `hconcat` or `vconcat`. Vega is more powerful to create layouts involving different plots. However, it is much more difficult/verbose to do so...
 
@@ -314,3 +316,5 @@ For simplicity's sake, we left out the `colourScale` and legend. Still, the spec
 -->
 
 In vega, we need to set the `layout`, and the `marks` is itself an array of subplots (each containing another `marks`...).
+
+{% include custom/series_vega_next.html %}

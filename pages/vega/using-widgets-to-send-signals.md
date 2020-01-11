@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-using-widgets-to-send-signals.html
 folder: vega
+series: vega-series
+weight: 16
 ---
 Sometimes it'd be nice to make a plot interactive so that you can set parameters without having to dive into the vega specification. We can use signals for this.
 
@@ -384,3 +386,5 @@ We can also hide the datapoints that do not comply to a given filter, e.g. on nu
   ]
 }
 -->
+
+{% include custom/series_vega_next.html %}

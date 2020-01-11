@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-selecting-datapoints.html
 folder: vega-lite
+series: vegalite-series
+weight: 9
 ---
 In many cases you will want to do something more than just show a tooltip for a single datapoint, but for example select one or multiple datapoints and change their encoding, or use them to filter a different plot.
 
@@ -107,3 +109,5 @@ This will give you the image below. Try dragging your mouse.
   }
 }
 -->
+
+{% include custom/series_vegalite_next.html %}

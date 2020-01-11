@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-axes.html
 folder: vega
+series: vega-series
+weight: 7
 ---
 The current plot is still extremely bare, without any axes. So let's add those. See [https://vega.github.io/vega/docs/axes/](https://vega.github.io/vega/docs/axes/) for documentation.
 
@@ -87,3 +89,5 @@ For axes, you must provide the orientation (whether `top`, `bottom`, `left` or `
   ]
 }
 -->
+
+{% include custom/series_vega_next.html %}

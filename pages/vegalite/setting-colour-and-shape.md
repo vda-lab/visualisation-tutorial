@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-setting-colour-and-shape.html
 folder: vega-lite
+series: vegalite-series
+weight: 3
 ---
 In all our plots the marks had a steelblue colour, but it'd be nice to use a different colour. We can do this in two ways, either specifying it within the `mark`, or within the `encoding`.
 
@@ -51,3 +53,5 @@ You'll see that the colour now depends on the data as well! Of course, in our da
 
 {:.exercise}
 **Exercise** - Look into the `point` documentation, and make the points filled instead of only showing the outline.
+
+{% include custom/series_vegalite_next.html %}

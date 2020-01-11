@@ -6,3 +6,5 @@ permalink: vegalite-interaction.html
 folder: vega-lite
 ---
 Test
+
+{% include custom/series_vegalite_next.html %}

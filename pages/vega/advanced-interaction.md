@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-advanced-interaction.html
 folder: vega
+series: vega-series
+weight: 12
 ---
 Vega uses the _reactive_ paradigm for interactivity. In reactive programming, the whole of the program is constantly re-evaluated: if a variable changes all other variables that depend on it are _automatically_ updated. This is in contrast to non-reactive programming, where we have to run those dependent variables again.
 
@@ -42,3 +44,5 @@ In the static images we created above, we had to define the `data`, `transforms`
 | scales     | scale inversions | `minVal = xScale.invert(minX)`                        |
 | guides     | predicates       | `p(t) = minVal =< t.value =< maxVal`                  |
 | marks      | production rules | `fill = p(t) -> colorScale(t.category) ; nil -> grey` |
+
+{% include custom/series_vega_next.html %}

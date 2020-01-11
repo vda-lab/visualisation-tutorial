@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: /vegalite-a-scatterplot-matrix.html
 folder: vega-lite
+series: vegalite-series
+weight: 13
 ---
 We've now seen how to do brushing and linking across different plots. One of the typical use cases is the scatterplot matrix. Based on what we've seen above, we can already create this, just by adding specifications to the `concat` section.
 
@@ -81,3 +83,5 @@ This will give you this image. Try selecting a group of datapoints.
 <!--
 <img src="{{ site.baseurl }}/assets/vegalite-splom.png" />
 -->
+
+{% include custom/series_vegalite_next.html %}

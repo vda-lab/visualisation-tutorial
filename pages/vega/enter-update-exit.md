@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-enter-update-exit.html
 folder: vega
+series: vega-series
+weight: 6
 ---
 Another difference that we see with vega-lite is the use of the `enter` tag. This is a very important concept that directly drills down into [D3](http://d3js.org) which is the javascript library underneath vega. To understand the concept, we need to make a clear distinction between marks on the screen, and the data underneath.
 
@@ -29,3 +31,5 @@ If after a change in the data there are more marks on the screen than necessary 
 In the scatterplots above, only the `enter` is provided, because this is a static dataset that does not change over time (not even changing colour on hover). In other words: we start with a dataset with n datapoints, but no marks yet on the screen. Hence we need the `enter`.
 
 We'll be using `update` later when looking at interactive visualisations.
+
+{% include custom/series_vega_next.html %}

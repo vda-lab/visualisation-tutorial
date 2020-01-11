@@ -5,6 +5,8 @@ sidebar: vegalite_sidebar
 toc: false
 permalink: vegalite_landing_page.html
 folder: vegalite
+series: vegalite-series
+weight: 0
 ---
 ![vega-lite]({{ site.baseurl }}/assets/vega-lite.png)
 
@@ -16,3 +18,5 @@ As we move through this part of the tutorial, make sure to have the vega-lite do
 - [examples](https://vega.github.io/vega-lite/examples/)
 - [tutorials](https://vega.github.io/vega-lite/tutorials/getting_started.html)
 - [documentation](https://vega.github.io/vega-lite/docs/)
+
+{% include custom/series_vegalite_next.html %}

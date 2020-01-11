@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-loading-external-data.html
 folder: vega
+series: vega-series
+weight: 9
 ---
 As much as it's easy, it can become unwieldy to have the actual dataset entered into the vega specification itself. As with vega-lite, we can let vega load data from an external URL. There are some differences with vega-lite, though:
 - In vega-lite, the `data` pragma takes an object (`{}`) as its value; in vega, it is an array (`[]`).
@@ -93,3 +95,6 @@ The result:
 
 {:.exercise}
 **Exercise** - Take the previous plot, and colour the points based on "Origin" (i.e. continent). Add a legend to show which colour corresponds to which origin. (First take a look at the data itself at the URL to know what it looks like.) The plot should look like this:<br/><img src="{{ site.baseurl }}/assets/vega-labelexercise.png" width="50%" />
+
+
+{% include custom/series_vega_next.html %}

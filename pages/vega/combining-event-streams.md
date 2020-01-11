@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-combining-event-streams.html
 folder: vega
+series: vega-series
+weight: 14
 ---
 Often you will want to filter event _streams_ (e.g. to throttle them so that you only get a signal every 5 seconds or so), or combine them.
 
@@ -26,3 +28,5 @@ You can _merge_ different streams into one.
 And finally you can also _throttle_ event streams so that only a certain number of events get through in a given period of time.
 
 <img src="{{ site.baseurl }}/assets/vega-event-throttled.png" width="50%" />
+
+{% include custom/series_vega_next.html %}

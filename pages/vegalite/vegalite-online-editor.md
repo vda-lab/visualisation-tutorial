@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-vegalite-online-editor.html
 folder: vega-lite
+series: vegalite-series
+weight: 2
 ---
 ![vegalite-online-editor]({{ site.baseurl }}/assets/vegalite-online-editor.png)
 
@@ -57,3 +59,5 @@ The `encoding` section specifies what is called the "visual encoding": it links 
   }
 }
 -->
+
+{% include custom/series_vegalite_next.html %}

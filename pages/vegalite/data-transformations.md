@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-data-transformations.html
 folder: vega-lite
+series: vegalite-series
+weight: 5
 ---
 Sometimes we'll want to do some calculations on the data before we actually visualise them. For example, we want to make a barchart that shows the average miles per gallon for each number of cylinders. Basically, we'll have to add a `transform` part to our specification:
 
@@ -264,3 +266,5 @@ Yet another way of creating a histogram is to work with two transforms: one to b
   }
 }
 -->
+
+{% include custom/series_vegalite_next.html %}

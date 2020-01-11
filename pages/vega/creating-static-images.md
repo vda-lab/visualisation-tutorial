@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-simple-scatterplot.html
 folder: vega
+series: vega-series
+weight: 1
 ---
 Here's the specification for the barest of scatterplots:
 
@@ -165,3 +167,5 @@ What differences do we see in vega?
 - There's an `enter` object within `encoding`.
 - In the `marks` section we need to specify the data used by name.
 - We have to define `scales` that we can use in the encoding.
+
+{% include custom/series_vega_next.html %}

@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-legends.html
 folder: vega
+series: vega-series
+weight: 8
 ---
 We now have a plot with points in different colours that are dependent upon the category, but we can't tell which colour is which category. Enter legends.
 
@@ -110,3 +112,5 @@ This looks more like what we expect:
 <img src="{{ site.baseurl }}/assets/vega-legendyscalereversed.png" width="50%" />
 
 Why did we loose that datapoint? That's because the scale went from 0 to the height. The datapoint `{"x": 15, "y": 8, "category": "A"}` has a value of 8 (which is the smallest value), so it's mapped to one extreme of the scale. The datapoint `{"x": 35, "y": 44, "category": "C"}` (which is the largest value) is mapped to the other extreme.
+
+{% include custom/series_vega_next.html %}

@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-facetting.html
 folder: vega-lite
+series: vegalite-series
+weight: 6
 ---
 We could already look at for example acceleration versus miles per gallon with year as colour to get a feeling of how things change over time. Another option, is to have a single plot per year.
 
@@ -77,3 +79,5 @@ Alternatively, you can define the facet at a higher level. According to the docu
   }
 }
 ```
+
+{% include custom/series_vegalite_next.html %}

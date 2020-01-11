@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-brushing-and-linking.html
 folder: vega-lite
+series: vegalite-series
+weight: 11
 ---
 Knowing how to make selections and how to make side-by-side views, we have all ingredients to create some linked-brushing plots.
 
@@ -229,3 +231,5 @@ We only have to replace the `circle` marks of the second plot as we had before, 
 }
 ...
 ```
+
+{% include custom/series_vegalite_next.html %}

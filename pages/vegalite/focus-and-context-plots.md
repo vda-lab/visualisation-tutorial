@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-focus-and-context-plots.html
 folder: vega-lite
+series: vegalite-series
+weight: 12
 ---
 Knowing how we can select/brush part of a dataset, and that we can bind these selections to a scale, we can make focus/context plots.
 
@@ -94,3 +96,5 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
   }]
 }
 ```
+
+{% include custom/series_vegalite_next.html %}

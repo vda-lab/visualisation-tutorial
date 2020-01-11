@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-changing-the-data.html
 folder: vega-lite
+series: vegalite-series
+weight: 4
 ---
 If your dataset is a bit bigger than what you see here, it'll become cumbersome to type this into the specification. It's often better to load your data from an external source. Looking at the [documentation](https://vega.github.io/vega-lite/docs/data.html) we see that data can be inline, or loaded from a URL. There is also something called "Named data sources", but we won't look into that.
 
@@ -56,3 +58,5 @@ So it is an _array_ (`[]`) of _objects_ (`{}`) where each object is a car for wh
 **Exercise 5**: Alter the specification in the vega-lite editor to recreate this image:
 
 <img src="{{ site.baseurl }}/assets/vegalite-cars-accelerationbympg.png" width="30%" />
+
+{% include custom/series_vegalite_next.html %}

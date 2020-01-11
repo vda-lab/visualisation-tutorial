@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-brushing-and-linking.html
 folder: vega
+series: vega-series
+weight: 20
 ---
 Whereas brushing and linking in vega-lite is very simple to do, it is very hard in vega. Although it _is_ possible, you'll have to play with signals, data, and some non-documented functions within the vega code. Hopefully, brushing/linking will be easier in one of the next versions.
 
@@ -423,3 +425,5 @@ Some observations:
 * The signal `activated_datapoint` captures _which_ datapoint your mouse is on: that is contained in `item()` (see [here](https://vega.github.io/vega/docs/expressions/#item)).
 * The `fill` is now an array instead of the simple `{"value": "lightgrey"}`. The first element of the array is a test with an associated value; the last element is the default value (i.e. when the test fails).
 * In the test, we check that _both_ a datapoint is activated, and that the datapoint which the mark refers to (`datum`) is the same as the datum of the activated datapoint.
+
+{% include custom/series_vega_next.html %}

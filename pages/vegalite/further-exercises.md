@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-further-exercises.html
 folder: vega-lite
+series: vegalite-series
+weight: 15
 ---
 For the exercises below, we will use the New York City citibike data available from [https://www.citibikenyc.com/system-data](https://www.citibikenyc.com/system-data). Some great [visuals by Juan Francisco Saldarriaga](https://juanfrans.com/projects/citibikeRebalancing.html) can inspire you.
 
@@ -210,3 +212,5 @@ We made a (small) part of the data available [here](https://raw.githubuserconten
 
 {:.exercise}
 **Exercise** - What other interesting plots could you make?
+
+{% include custom/series_vegalite_next.html %}

@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-placing-views-side-by-side.html
 folder: vega-lite
+series: vegalite-series
+weight: 7
 ---
 You can also take more control of which plots are put side by side, by using `concat`, `hconcat` or `vconcat`. This pragma can contain a list of objects with `mark` and `encoding` pairs:
 
@@ -64,3 +66,5 @@ For example:
 Do not forget to put each `mark` - `encoding` pair within curly brackets! The above specification should give you the following image:
 
 <img src="{{ site.baseurl }}/assets/vegalite-sidebyside.png" width="50%" />
+
+{% include custom/series_vegalite_next.html %}

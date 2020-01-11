@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-using-widgets-for-selection.html
 folder: vega-lite
+series: vegalite-series
+weight: 14
 ---
 ### Using widgets for selection
 We can also use HTML widgets to create selections. For this we'll bind an HTML input element to a data field. In the example below, we create a
@@ -139,3 +141,5 @@ There is more than just the dropdown widget. Here are the options:
 
 {:.exercise}
 **Exercise** - Alter the last plot so that you use radio buttons for the origin, and a slider for number of cylinders.
+
+{% include custom/series_vegalite_next.html %}

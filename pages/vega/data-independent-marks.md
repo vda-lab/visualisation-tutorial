@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-data-independent-marks.html
 folder: vega
+series: vega-series
+weight: 3
 ---
 In the `marks` section in vega, the `from` pragma points to the dataset that should be used: for every datapoint in the dataset, a single mark is created. If _no_ `from` is provided, vega defaults to creating a single mark. Let's for example add a red square and a bit of text to the plot above:
 
@@ -79,3 +81,5 @@ In the `marks` section in vega, the `from` pragma points to the dataset that sho
 Notice that there is no `from` defined for the square and the text.
 
 <img src="{{ site.baseurl }}/assets/vega-singlemark.png" width="50%" />
+
+{% include custom/series_vega_next.html %}

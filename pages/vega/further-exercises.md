@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-further-exercises.html
 folder: vega
+series: vega-series
+weight: 22
 ---
 
 **TODO**:
@@ -244,3 +246,5 @@ A possible output made with vega (interactive):
 <!--
 <img src="{{ site.baseurl }}/assets/vega-citibike-dial-custom.png" width="300px" />
 -->
+
+{% include custom/series_vega_next.html %}

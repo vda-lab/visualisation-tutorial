@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-simplest-barchart.html
 folder: vega-lite
+series: vegalite-series
+weight: 1
 ---
 Here's a _very_ simple barchart defined in vega-lite.
 
@@ -62,3 +64,5 @@ The keys in the example above are `data`, `mark` and `encoding`. On the document
 - `data`: either lists the data that will be used, or provides a link to an external source
 - `mark`: tells us what type of visual we want. In this case, we want bars. These can be `area`, `bar`, `circle`, `line`, `point`, `rect`, `rule`, `square`, `text`, `tick` and `geoshape`.
 - `encoding`: tells us how to link the data to the marks.
+
+{% include custom/series_vegalite_next.html %}

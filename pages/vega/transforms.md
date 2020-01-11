@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-transforms.html
 folder: vega
+series: vega-series
+weight: 10
 ---
 
 In the vega-lite tutorial, we saw how we can use transforms to preprocess the data before it gets plotted. We can filter the data, aggregate it, compute a formula, sample, etc. For a full list of possible transformations, see the `transform` documentation at [https://vega.github.io/vega/docs/transforms/](https://vega.github.io/vega/docs/transforms/).
@@ -98,3 +100,5 @@ The `binned` dataset (note the two additional columns at the end):
 The `aggregated` dataset:
 
 <img src="{{ site.baseurl }}/assets/vega-dataviewer-aggregated.png" width="30%"/>
+
+{% include custom/series_vega_next.html %}

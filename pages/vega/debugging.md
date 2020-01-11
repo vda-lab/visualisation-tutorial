@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-debugging.html
 folder: vega
+series: vega-series
+weight: 21
 ---
 **TODO**: add start with vega-lite and look at compiled vega
 
@@ -29,3 +31,5 @@ Now type in that command again, but _without pressing enter_. Put your mouse on 
 
 {:.exercise}
 **Exercise** - Try out what happens if you don't include the `datapoint_is_activated` in the test above. Tip: open the console as describe above in "Note on debugging".
+
+{% include custom/series_vega_next.html %}

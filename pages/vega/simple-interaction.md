@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-simple-interaction.html
 folder: vega
+series: vega-series
+weight: 11
 ---
 You do get some interaction for free with vega, including tooltips, effects on hover, etc.
 
@@ -128,3 +130,5 @@ The result (hover over the datapoints):
 
 {:.exercise}
 **Exercise** - What happens if we don't add the update section?
+
+{% include custom/series_vega_next.html %}

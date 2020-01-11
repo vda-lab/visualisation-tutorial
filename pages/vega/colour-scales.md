@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-colour-scales.html
 folder: vega
+series: vega-series
+weight: 5
 ---
 ## Categorical colours
 In the last exercise, we defined the colour of each bar in the data itself. It'd be better if we can let vega pick the colour for us instead. This is where _colour scales_ come into play.
@@ -114,3 +116,5 @@ If you really want to, you can also set the colours by hand. For example, we wan
   "range": ["blue","blue","red"]
 }
 ```
+
+{% include custom/series_vega_next.html %}

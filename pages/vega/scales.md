@@ -4,6 +4,8 @@ keywords: vega
 sidebar: vega_sidebar
 permalink: vega-scales-overview.html
 folder: vega
+series: vega-series
+weight: 4
 ---
 Scales (see their documentation [here](https://vega.github.io/vega/docs/scales/)) convert data from the original domain to a range that can be used for plotting. For example, imagine you have longitude data from a map. Locations on the earth have a longitude that is between -180 and 180. We want to plot this on a graph that is 800 pixels wide. If we'd just use the longitude for the `x` value, than any location west of Greenwich would be outside of the plot (because smaller than zero), and most of the right of the graphic would be empty (because there are no points in the range -180 to 800). We need to recalculate the positions: -180 (degrees) needs to become 0 (pixels), 0 (degrees) needs to become 400 (pixels) and 180 (degrees) needs to become 800 (pixels).
 
@@ -40,3 +42,5 @@ Instead of providing a minimum and maximum value for `domain` or `range`, we can
 Different types of scales exist, including `linear`, `sqrt`, `ordinal` etc. See the documentation at [https://vega.github.io/vega/docs/scales/#types](https://vega.github.io/vega/docs/scales/#types) for a full reference.
 
 Scales are not only interesting for recalculating ranges, but they are used to assign colours to categories as well. We'll come back to those later.
+
+{% include custom/series_vega_next.html %}

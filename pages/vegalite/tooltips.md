@@ -4,6 +4,8 @@ keywords: vegalite
 sidebar: vegalite_sidebar
 permalink: vegalite-tooltips.html
 folder: vega-lite
+series: vegalite-series
+weight: 8
 ---
 The easiest - but still very useful - interaction you can create for a plot is to show a tooltip on hover. This is straightforward, but just adding the `tooltip` key in the `encoding` section:
 
@@ -56,3 +58,5 @@ This will get you the following behaviour (interactive):
 **Exercise** - Adapt the facetted plot you created before to include a tooltip showing the name of the car, like in the next plot.
 
 <img src="{{ site.baseurl }}/assets/vegalite-tooltip-facetted.png"/>
+
+{% include custom/series_vegalite_next.html %}
