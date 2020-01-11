@@ -14,3 +14,5 @@ topnav_dropdowns:
       folderitems:
         - title: Vega-lite
           url: /vegalite_landing_page.html
+        - title: Vega
+          url: /vega_landing_page.html

@@ -11,3 +11,6 @@ entries:
     - title: Vega-Lite
       url: /vegalite_landing_page.html
       output: web
+    - title: Vega
+      url: /vega_landing_page.html
+      output: web
