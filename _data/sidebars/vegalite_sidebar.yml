@@ -1,7 +1,6 @@
 entries:
 - title: sidebar
   product: Vega-Lite tutorial
-  version: 1.0
   folders:
 
   - title:
@@ -17,11 +16,81 @@ entries:
       output: pdf
       type: frontmatter
 
-  - title: Vega-lite
+  - title: Creating static images
     output: web, pdf
     folderitems:
-
     - title: A simple barchart
       url: /simplest-barchart.html
       output: web, pdf
-      type: homepage
+    - title: Vega-Lite online editor
+      url: /vegalite-online-editor.html
+      output: web, pdf
+    - title: Setting colour and shape
+      url: /setting-colour-and-shape.html
+      output: web, pdf
+    - title: Changing the data
+      url: /changing-the-data.html
+      output: web, pdf
+  - title: Data transformations
+    output: web, pdf
+    folderitems:
+      - title: Creating data transformations
+        url: /data-transformations.html
+        output: web, pdf
+  - title: Composing plots
+    url: /composing-plots.html
+    output: web, pdf
+    folderitems:
+    - title: Facetting
+      url: /facetting.html
+      output: web, pdf
+    - title: Placing views side-by-side
+      url: /placing-views-side-by-side.html
+      output: web, pdf
+  - title: Interacting with the images
+    url: /interaction.html
+    output: web, pdf
+    folderitems:
+    - title: Tooltips
+      url: /tooltips.html
+      output: web, pdf
+    - title: Selecting datapoints
+      url: /selecting-datapoints.html
+      output: web, pdf
+    - title: Zooming and panning
+      url: /zooming-and-panning.html
+      output: web, pdf
+    - title: Brushing and linking
+      url: /brushing-and-linking.html
+      output: web, pdf
+      subfolderitems:
+      - title: Equivalent plots
+        url: /equivalent-plots.html
+        output: web, pdf
+      - title: Non-equivalent plots
+        url: /non-equivalent-plots.html
+        output: web, pdf
+    - title: Focus & context plots
+      url: /focus-and-context-plots.html
+      output: web, pdf
+    - title: A scatterplot matrix
+      url: /a-scatterplot-matrix.html
+      output: web, pdf
+  - title: Using widgets for selections
+    output: web, pdf
+    folderitems:
+    - title: Using widgets for selections
+      url: /using-widgets-for-selection.html
+      output: web
+  - title: Further exercises
+    output: web, pdf
+    folderitems:
+      - title: Further exercises
+        url: /further-exercises.html
+        output: web, pdf
+  - title: Where next?
+    output: web, pdf
+    folderitems:
+    - title: Where next?
+      url: /where-next.html
+      output: web, pdf

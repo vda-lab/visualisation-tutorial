@@ -15,6 +15,10 @@
 <link rel="stylesheet" href="{{ "/css/syntax.css" | prepend: site.baseurl | prepend: site.url }}">
 <link rel="stylesheet" href="{{ "/css/printstyles.css" | prepend: site.baseurl }}">
 
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
 <script>
     Prince.addScriptFunc("datestamp", function() {
         return "PDF last generated: {{ site.time | date: '%B %d, %Y' }}";

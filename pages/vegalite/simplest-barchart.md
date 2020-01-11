@@ -1,7 +1,6 @@
 ---
 title: The simplest barchart
 keywords: vegalite
-summary: "Creating a simple barchart"
 sidebar: vegalite_sidebar
 permalink: simplest-barchart.html
 folder: vega-lite
