@@ -37,7 +37,7 @@ You will notice that the generated Vega spec is very verbose and can rely on dif
 * Also, replace automatically generated signal/data/mark names (like `"concat_0_layer_1_bin_maxbins_10_IMDB_Rating_bins"`) to something that makes more sense to you.
 
 ### Web browser console
-How to find out that we have to use `activated_datapoint.datum`? I must admit that this took me a while... In the signal viewer in the bottom right of the vega editor you can see that the value for `activated_datapoint` changes from `null` to `(...)` if we mouse over a datapoint. We cannot see what the value actually is. The vega documentation on debugging at [https://vega.github.io/vega/docs/api/debugging/](https://vega.github.io/vega/docs/api/debugging/) tells us that we can access more information if we open the debug console.
+How to find out that we have to use `activated_datapoint.datum` in the brushing and linking section? I must admit that this took me a while... In the signal viewer in the bottom right of the vega editor you can see that the value for `activated_datapoint` changes from `null` to `(...)` if we mouse over a datapoint. We cannot see what the value actually is. The vega documentation on debugging at [https://vega.github.io/vega/docs/api/debugging/](https://vega.github.io/vega/docs/api/debugging/) tells us that we can access more information if we open the debug console of the web browser itself.
 
 To open the debug console in Google Chrome, go to View => Developer => Developer Tools, and then click on `Console`. Type in `VEGA_DEBUG.view.signal('activated_datapoint')` in the console. The output will probably be `null`.
 
