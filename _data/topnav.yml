@@ -16,3 +16,5 @@ topnav_dropdowns:
           url: /vegalite_landing_page.html
         - title: Vega
           url: /vega_landing_page.html
+        - title: HoloViz
+          url: /holoviz_landing_page.html

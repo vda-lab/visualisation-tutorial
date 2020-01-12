@@ -11,7 +11,7 @@ The contents of these tutorials is licensed as CC-BY: feel free to copy/remix/tw
 
 ![CC-BY]({{ site.baseurl }}/assets/ccby.png)
 
-In these tutorial, we will work in different phases, looking at vega-lite, vega, and Holoviz. We'll start with vega-lite and vega in the [online editor](https://vega.github.io/editor/) that they provide, and move on to using holoviz at a later stage.
+In these tutorial, we will work in different phases, looking at vega-lite, vega, and Holoviz. We'll start with vega-lite and vega in the [online editor](https://vega.github.io/editor/) that they provide, and move on to using HoloViz at a later stage.
 
 This tutorial is based on material provided on the vega-lite, vega and holoviz websites, as well as teaching material collected by Ryo Sakai.
 

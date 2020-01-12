@@ -1,0 +1,30 @@
+entries:
+- title: sidebar
+  product: HoloViz tutorial
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
+
+  - title: Setting things up
+    output: web, pdf
+    folderitems:
+    - title: Installation and jupyter notebook
+      url: /holoviz-installation-and-jupyter-notebook.html
+      output: web, pdf
+    - title: A minimal vega plot in jupyter notebook
+      url: /holoviz-minimal-vega-plot-in-jupyter-notebook.html
+      output: web, pdf
+    - title: Splitting the specification
+      url: /holoviz-splitting-the-specification.html
+      output: web, pdf
