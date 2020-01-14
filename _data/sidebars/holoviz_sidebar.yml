@@ -28,3 +28,18 @@ entries:
     - title: Splitting the specification
       url: /holoviz-splitting-the-specification.html
       output: web, pdf
+  - title: Panels
+    output: web, pdf
+    folderitems:
+    - title: What is panel?
+      url: /holoviz-what-is-panel.html
+      output: web, pdf
+    - title: Panel layout
+      url: /holoviz-panel-layout.html
+      output: web, pdf
+    - title: Panel is reactive
+      url: /holoviz-panel-is-reactive.html
+      output: web, pdf
+    - title: Panel and Vega
+      url: /holoviz-panel-and-vega.html
+      output: web, pdf

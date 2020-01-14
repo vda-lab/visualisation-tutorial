@@ -61,4 +61,4 @@ Different elements in a JSON object or array have to be separated by a comma `,`
 
 * [Vega-Lite]({{ site.baseurl }}/vegalite_landing_page.html)
 * [Vega]({{ site.baseurl }}/vega_landing_page.html)
-* [Holoviz]()
+* [Holoviz]({{ site.baseurl }}/holoviz_landing_page.html)

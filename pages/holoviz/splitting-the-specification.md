@@ -79,6 +79,12 @@ scales = [
   }
 ]
 ```
+This will give you an error, because the `true` used in the Vega specification is lowercase, while a `True` in python needs to be capitalised. So we have to change this first.
+
+<img src="{{ site.baseurl }}/assets/holoviz-true-error.png" width="50%" />
+
+In all the code below, I've already made this change.
+
 
 The axes:
 ```python
@@ -86,7 +92,7 @@ mpg_y_axis = {
   "scale": "mpg_yscale",
   "orient": "left",
   "gridScale": "mpg_yscale",
-  "grid": true,
+  "grid": True,
   "tickCount": 5,
   "title": "Miles_per_Gallon"
 }
@@ -95,7 +101,7 @@ acceleration_x_axis = {
   "scale": "acceleration_xscale",
   "orient": "bottom",
   "gridScale": "acceleration_xscale",
-  "grid": true,
+  "grid": True,
   "tickCount": 5,
   "title": "Acceleration"
 }
@@ -104,7 +110,7 @@ horsepower_x_axis = {
   "scale": "horsepower_xscale",
   "orient": "bottom",
   "gridScale": "horsepower_xscale",
-  "grid": true,
+  "grid": True,
   "tickCount": 5,
   "title": "Horse power"
 }
@@ -168,7 +174,7 @@ plot2 = {
 
 This makes the final specification much more uncluttered.
 ```python
-{
+spec2 = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "padding": 5,
   "data": [ cars_dataset ],
@@ -181,7 +187,7 @@ This makes the final specification much more uncluttered.
 }
 ```
 
-We've seen in the [debugging section of the Vega tutorial]({{ site.baseurl }}/vega-debugging.html) that the online vega editor has some very useful features for writing correct vega code. We don't have those here, but being able to split up the code in smaller parts can help a lot, _and_ we can build these parts up within the notebook.
+This will get us the following plot that we also created in the vega tutorial.
 
 <div id="vis1"></div>
 <script type="text/javascript">
@@ -312,5 +318,7 @@ We've seen in the [debugging section of the Vega tutorial]({{ site.baseurl }}/ve
     };
   vegaEmbed('#vis1', yourVlSpec);
 </script>
+
+We've seen in the [debugging section of the Vega tutorial]({{ site.baseurl }}/vega-debugging.html) that the online vega editor has some very useful features for writing correct vega code. We don't have those here, but being able to split up the code in smaller parts can help a lot, _and_ we can build these parts up within the notebook.
 
 {% include custom/series_holoviz_next.html %}
