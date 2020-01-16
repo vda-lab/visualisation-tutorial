@@ -43,3 +43,12 @@ entries:
     - title: Panel and Vega
       url: /holoviz-panel-and-vega.html
       output: web, pdf
+    - title: Sharing dashboards
+      url: /holoviz-sharing-dashboards.html
+      output: web, pdf
+    - title: Linking widgets to visuals
+      url: /holoviz-linking-widgets-to-visuals.html
+      output: web, pdf
+    - title: Linking and brushing between panes
+      url: /holoviz-linking-and-brushing-between-panes.html
+      output: web, pdf
