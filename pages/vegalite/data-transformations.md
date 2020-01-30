@@ -52,7 +52,27 @@ Another option is to use a filter like this: `{"filter": "datum.Cylinders <= 5"}
 
 Both will give the following image:
 
-<img src="{{ site.baseurl }}/assets/vegalite-cars-filter.png" width="50%" />
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    },
+    "transform": [
+      {
+        "filter": {"field": "Cylinders", "lte": "5"}
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "Cylinders", "type": "quantitative"},
+      "y": {"field": "Acceleration", "type": "quantitative"},
+      "size": {"value": 20}
+    }
+  };
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
 
 A filter does not change the data objects itself. This is different for many other transformations. For example, we can `calculate` as well. For example, the "Year" attribute in each object is now a string, e.g. "1970-01-01". It'd be good if this would be a number. We'll need to look into vega _expressions_ on how to do this [here](https://vega.github.io/vega/docs/expressions/). There seem to be [date-time functions](https://vega.github.io/vega/docs/expressions/#datetime-functions), we it appears we can extract the year with `year(datum.Year)`.
 
@@ -236,7 +256,32 @@ Yet another way of creating a histogram is to work with two transforms: one to b
 }
 ```
 
-<img src="{{ site.baseurl }}/assets/vegalite-histogram.png" width="50%" />
+<div id="vis2"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    },
+    "transform": [
+      {"bin": true, "field": "Miles_per_Gallon", "as": "binned_mpg"},
+      {
+        "aggregate": [{
+           "op": "count",
+           "field": "binned_mpg",
+           "as": "count_mpg"
+        }],
+        "groupby": ["binned_mpg"]
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "binned_mpg","type": "quantitative"},
+      "y": {"field": "count_mpg", "type": "quantitative"}
+    }
+  };
+  vegaEmbed('#vis2', yourVlSpec);
+</script>
 
 {:.exercise}
 **Exercise** - Create a plot showing the mean acceleration per bin of miles per gallon.

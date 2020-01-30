@@ -65,6 +65,38 @@ For example:
 
 Do not forget to put each `mark` - `encoding` pair within curly brackets! The above specification should give you the following image:
 
-<img src="{{ site.baseurl }}/assets/vegalite-sidebyside.png" width="50%" />
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "title": "Side-by-side plots",
+    "data": {
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    },
+    "transform": [
+      { "calculate": "year(datum.Year)", "as": "yearonly" }
+
+    ],
+    "concat": [
+      {
+        "mark": "circle",
+        "encoding": {
+          "x": {"field": "Acceleration", "type": "quantitative"},
+          "y": {"field": "Miles_per_Gallon", "type": "quantitative"},
+          "color": {"field": "yearonly", "type": "ordinal"}
+        }
+      },
+      {
+        "mark": "circle",
+        "encoding": {
+          "x": {"field": "Horsepower", "type": "quantitative"},
+          "y": {"field": "Miles_per_Gallon", "type": "quantitative"},
+          "color": {"field": "yearonly", "type": "ordinal"}
+        }
+      }
+    ]
+  };
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
 
 {% include custom/series_vegalite_next.html %}
