@@ -103,6 +103,7 @@ sidebars:
 - home_sidebar
 - vegalite_sidebar
 - vega_sidebar
+- holoviz-sidebar
 
 description: "Data visualisation tutorial, focussing on vega, vega-lite and holoviz"
 # the description is used in the feed.xml file
