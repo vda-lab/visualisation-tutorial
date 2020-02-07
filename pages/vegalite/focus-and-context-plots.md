@@ -26,7 +26,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
         "x": {
           "field": "date",
           "type": "temporal",
-          "scale": {"domain": {"selection": "brush"}},
+          "scale": {"domain": {"selection": "my_brush"}},
           "axis": {"title": ""}
         },
         "y": {"field": "price", "type": "quantitative"}
@@ -36,7 +36,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
       "height": 60,
       "mark": "area",
       "selection": {
-        "brush": {"type": "interval", "encodings": ["x"]}
+        "my_brush": {"type": "interval", "encodings": ["x"]}
       },
       "encoding": {
         "x": {
@@ -45,8 +45,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
         },
         "y": {
           "field": "price",
-          "type": "quantitative",
-          "axis": {"grid": false}
+          "type": "quantitative"
         }
       }
     }]
@@ -70,7 +69,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
       "x": {
         "field": "date",
         "type": "temporal",
-        "scale": {"domain": {"selection": "brush"}},
+        "scale": {"domain": {"selection": "my_brush"}},
         "axis": {"title": ""}
       },
       "y": {"field": "price", "type": "quantitative"}
@@ -80,7 +79,7 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
     "height": 60,
     "mark": "area",
     "selection": {
-      "brush": {"type": "interval", "encodings": ["x"]}
+      "my_brush": {"type": "interval", "encodings": ["x"]}
     },
     "encoding": {
       "x": {
@@ -89,12 +88,16 @@ The example below shows this on the S&P500 data. Try selecting a range in the bo
       },
       "y": {
         "field": "price",
-        "type": "quantitative",
-        "axis": {"grid": false}
+        "type": "quantitative"
       }
     }
   }]
 }
 ```
+
+ The code `"encodings": ["x"]` in the bottom plot makes sure that you can only select along the x-axis as it makes no sense to select on y-values.
+
+ {:.exercise}
+ **Exercise** - See what happens if you remove the `"encodings": ["x"]`.
 
 {% include custom/series_vegalite_next.html %}

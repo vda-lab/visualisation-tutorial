@@ -7,8 +7,21 @@ folder: vega-lite
 series: vegalite-series
 weight: 14
 ---
+
+Based on what we've seen so far, we can create selections by dragging across or clicking on datapoints. In other words: our selections are at the level of specific datapoints. Often, however, we'll want to select datapoints based on one or more of their features. For the cars dataset, we might for example want to select all cars that are made in the US.
+
 ### Using widgets for selection
-We can also use HTML widgets to create selections. For this we'll bind an HTML input element to a data field. In the example below, we create a
+In addition to dragging and/or clicking, we can use HTML widgets to create selections. For this we'll bind an HTML input element to a data field. In the example below, we use a selection that looks like this:
+
+```text
+"my_selection": {
+  "type": "single",
+  "fields": <array_of_fields>,
+  "bind": {"input": <type_of_html_element>, "options": <array_of_options>}
+}
+```
+
+The `fields` key points to the feature in the data that should be filtered. This should be an array, so e.g. `["Origin"]` instead of `"Origin"`. The `bind` key points to the HTML element itself. The information that we need is the type of input element (for all types, see below), and - for a `"select"` element in this case - the options that should be in the dropdown box.
 
 ```json
 {
@@ -38,7 +51,7 @@ We can also use HTML widgets to create selections. For this we'll bind an HTML i
 }
 ```
 
-The result is a selection box that we can use to filter the data:
+The `null` as first option in the dropdown box makes sure that all points are selected if no option is selected.
 
 <div id="vis8"></div>
 <script type="text/javascript">
@@ -123,7 +136,7 @@ Another way of combining two filters, is to put them both in the `bind` section:
       "Origin": {"input": "select", "options": [null, "Europe", "Japan", "USA"]},
       "Cylinders": {"input": "select", "options": [null, 2,3,4,5,6,7,8]}
   }
-},
+}
 ```
 
 ### Types of widgets
@@ -138,6 +151,8 @@ There is more than just the dropdown widget. Here are the options:
   * e.g. `"electric": {"input": "checkbox"}`
 * `radio`: radio buttons
   * e.g. `"Origin": {"input": "radio", "options": ["Europe", "Japan", "USA"]}`
+
+The different types of widgets require different arguments, so check the documentation.
 
 {:.exercise}
 **Exercise** - Alter the last plot so that you use radio buttons for the origin, and a slider for number of cylinders.

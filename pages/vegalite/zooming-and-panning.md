@@ -31,6 +31,8 @@ A simple example:
 }
 ```
 
+The `grid` in this specification is - just like in the previous section - nothing more than a name that we give to the selection. It could have been `abcde` as well...
+
 <div id="vis4"></div>
 <script type="text/javascript">
   var yourVlSpec = {
