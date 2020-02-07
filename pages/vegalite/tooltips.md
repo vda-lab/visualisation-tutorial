@@ -7,7 +7,7 @@ folder: vega-lite
 series: vegalite-series
 weight: 8
 ---
-The easiest - but still very useful - interaction you can create for a plot is to show a tooltip on hover. This is straightforward, but just adding the `tooltip` key in the `encoding` section:
+The easiest - but still very useful - interaction you can create for a plot is to show a tooltip on hover. This is straightforward: you just add the `tooltip` key in the `encoding` section with an array of the fields that you want to have included in that tooltip:
 
 ```json
 {

@@ -99,4 +99,9 @@ Do not forget to put each `mark` - `encoding` pair within curly brackets! The ab
   vegaEmbed('#vis1', yourVlSpec);
 </script>
 
+{:.exercise}
+**Exercise** - Recreate the plot below (i.e. including the fact that it has 2 columns and 2 rows!). Tip: check the documentation for `concat`.
+
+<img src="{{site.baseurl}}/assets/vegalite-2by2concat.png" width="50%"/>
+
 {% include custom/series_vegalite_next.html %}

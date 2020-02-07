@@ -16,6 +16,12 @@ entries:
       output: pdf
       type: frontmatter
 
+  - title: Vega-lite landing page
+    output: web, pdf
+    folderitems:
+      - title: Vega-lite landing page
+        url: /vegalite_landing_page.html
+        output: web, pdf
   - title: Creating static images
     output: web, pdf
     folderitems:

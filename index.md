@@ -19,7 +19,7 @@ This tutorial is based on material provided on the vega-lite, vega and holoviz w
 ### What are vega-lite and vega?
 You might have heard of [D3](http://d3js.org) as a library to create interactive data visualisations. Indeed, this library is considered the standard in the field. Unfortunately, it does have quite a steep learning curve which makes it not ideal if you have to learn it in 2-3 days without a background in javascript programming. In this course, we'll use vega and vega-lite instead. Both are so-called _declarative_ languages, where you tell the computer _what_ you need, not _how_ to do it. Vega and vega-lite are expressed in _JSON_ ("javascript object notation").
 
-This image by [Eric Marty](https://blog.ericmarty.com/the-d3-/-vega-stack) provides a good overview how the different parts are related:
+This image by [Eric Marty](https://blog.ericmarty.com/the-d3-/-vega-stack) provides a good overview how D3, vega and vega-lite are related:
 
 <img src="{{ site.baseurl }}/assets/d3-vega-vegalite-stack.png" />
 
@@ -46,7 +46,7 @@ The resulting barchart:
 <img src="{{ site.baseurl }}/assets/vegalite-barchart.png" width="300px"/>
 
 ### JSON
-Let's first have a look at the JSON format:
+The above code is nothing more than a JSON (JavaScript Object Notation) data structure. It is similar to XML, but more readable:
 
 - strings are put between double quotes `"`
 - numbers are _not_ put between quotes
@@ -56,6 +56,8 @@ Let's first have a look at the JSON format:
 Also, these objects can be nested. In the example above, the whole thing is a single JSON object, consisting of key-value pairs (keys being `"$schema"`, `"data"`, `"mark"` and `"encoding"`). The `"data"` key itself holds an object `{ "values": [ ... ]}`. The `"values"` key in its place is an array of objects again.
 
 Different elements in a JSON object or array have to be separated by a comma `,`.
+
+That's the preamble finished. Let's start with...
 
 ## The actual tutorials
 

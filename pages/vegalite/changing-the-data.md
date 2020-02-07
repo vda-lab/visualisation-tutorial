@@ -7,7 +7,7 @@ folder: vega-lite
 series: vegalite-series
 weight: 4
 ---
-If your dataset is a bit bigger than what you see here, it'll become cumbersome to type this into the specification. It's often better to load your data from an external source. Looking at the [documentation](https://vega.github.io/vega-lite/docs/data.html) we see that data can be inline, or loaded from a URL. There is also something called "Named data sources", but we won't look into that.
+If your dataset is a bit bigger than what you see here, it'll become impossible to type this into the specification. It's often better to load your data from an external source. Looking at the [documentation](https://vega.github.io/vega-lite/docs/data.html) we see that data can be inline, or loaded from a URL. There is also something called "Named data sources", but we won't look into that here.
 
 What we've done above is provide the data inline. In that case, you need the `values` key, e.g.
 

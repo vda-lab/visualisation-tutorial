@@ -15,8 +15,9 @@ To change colour at the `mark` level, we have to provide the mark with an _objec
 "mark": {"type": "point", "color": "red"},
 ...
 ```
+Changing the colour at the `mark` level means that all marks will have the same colour and we won't make the colour dependent on the data.
 
-To change colour at the `encoding` level, but we cannot just say `"color": "red"`. The `color` key takes an _object_ as its value. For a fixed value (i.e. "red"), this should be `{"value": "red"}`.
+To change colour at the `encoding` level, we cannot just say `"color": "red"`. The `color` key takes an _object_ as its value. For a fixed value (i.e. "red"), this should be `{"value": "red"}`.
 
 ```json
 ...

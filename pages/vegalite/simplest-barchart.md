@@ -65,4 +65,7 @@ The keys in the example above are `data`, `mark` and `encoding`. On the document
 - `mark`: tells us what type of visual we want. In this case, we want bars. These can be `area`, `bar`, `circle`, `line`, `point`, `rect`, `rule`, `square`, `text`, `tick` and `geoshape`.
 - `encoding`: tells us how to link the data to the marks.
 
+{:.exercise}
+**Exercise** - Check in the documentation: [1] what types of data can be loaded, [2] what the different types of marks are, and [3] what the different encoding channels are (i.e. what is available apart from `x` and `y`?)
+
 {% include custom/series_vegalite_next.html %}

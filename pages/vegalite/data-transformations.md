@@ -7,7 +7,35 @@ folder: vega-lite
 series: vegalite-series
 weight: 5
 ---
-Sometimes we'll want to do some calculations on the data before we actually visualise them. For example, we want to make a barchart that shows the average miles per gallon for each number of cylinders. Basically, we'll have to add a `transform` part to our specification:
+Sometimes we'll want to do some calculations on the data before we actually visualise them. For example, we want to make a barchart that shows the average miles per gallon for each number of cylinders.
+
+<div id="vis3"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    },
+    "transform": [
+      {
+        "aggregate": [{
+           "op": "mean",
+           "field": "Miles_per_Gallon",
+           "as": "mean_mpg"
+        }],
+        "groupby": ["Cylinders"]
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "x": {"field": "Cylinders", "type": "quantitative"},
+      "y": {"field": "mean_mpg", "type": "quantitative"}
+    }
+  };
+  vegaEmbed('#vis3', yourVlSpec);
+</script>
+
+To do this, we'll have to add a `transform` part to our specification:
 
 ```json
 {
@@ -19,6 +47,8 @@ Sometimes we'll want to do some calculations on the data before we actually visu
 ```
 
 There is extensive documentation available for these transforms at [https://vega.github.io/vega-lite/docs/transform.html](https://vega.github.io/vega-lite/docs/transform.html). Possible transformations that we can apply are: aggregate, bin, calculate, density, filter, flatten, fold, impute, join aggregate, lookup, pivot, quantile, regression and loess regression, sample, stack, time unit, and window.
+
+### Filtering
 
 In the case of _filtering_, it is quite clear what will happen: only the objects that match will be displayed. We can for example show a barchart of acceleration only for those cars that have 5 or fewer cylinders. One of the problems that we run into, is that the specification needs to be in JSON format. To say that we only want cars with 5 or fewer cylinders, we'll use `"filter": {"field": "Cylinders", "lte": "5"}`. The `lte` stands for "less than or equal to". There is also:
 - `equal`
@@ -48,7 +78,7 @@ In the case of _filtering_, it is quite clear what will happen: only the objects
 }
 ```
 
-Another option is to use a filter like this: `{"filter": "datum.Cylinders <= 5"}` where `datum` stands for a single object, and `.Cylinders` will get the value for that property.
+Another option is to use a filter like this: `{"filter": "datum.Cylinders <= 5"}` where `datum` stands for the single object, and `.Cylinders` will get the value for that property ("Cylinders" is capitalised in the data that we are loading, so we have to capitalise it here as well).
 
 Both will give the following image:
 
@@ -74,7 +104,7 @@ Both will give the following image:
   vegaEmbed('#vis1', yourVlSpec);
 </script>
 
-A filter does not change the data objects itself. This is different for many other transformations. For example, we can `calculate` as well. For example, the "Year" attribute in each object is now a string, e.g. "1970-01-01". It'd be good if this would be a number. We'll need to look into vega _expressions_ on how to do this [here](https://vega.github.io/vega/docs/expressions/). There seem to be [date-time functions](https://vega.github.io/vega/docs/expressions/#datetime-functions), we it appears we can extract the year with `year(datum.Year)`.
+A filter does not change the data objects itself. This is different for many other transformations. For example, we can `calculate` as well. For example, the "Year" attribute in each object is now a string, e.g. "1970-01-01". It'd be good if this would be a number. We'll need to look into vega _expressions_ on how to do this [here](https://vega.github.io/vega/docs/expressions/). There seem to be [date-time functions](https://vega.github.io/vega/docs/expressions/#datetime-functions), and it appears we can extract the year with `year(datum.Year)`.
 
 What does this do? _This effectively adds a new field to each object, called `yearonly`_. We can now use this new field as any other.
 
@@ -98,6 +128,8 @@ What does this do? _This effectively adds a new field to each object, called `ye
 
 {:.exercise}
 **Exercise** - Create an image that plots the original `Year` versus the new `yearonly`.
+
+### Aggregation
 
 So with calculations, we get an additional field. What if we want to _aggregate_? Let's go back to our initial question: we want to have a barchart that shows the average miles per gallon for each number of cylinders. Below is the specification:
 
@@ -125,7 +157,7 @@ So with calculations, we get an additional field. What if we want to _aggregate_
 }
 ```
 
-In the documentation, we see that `aggregate` takes a `AggregatedFieldDef[]`, and `groupby` takes a `String[]`. The `[]` after each of these indicates that they should be _arrays_, not single values. That is why we use `"aggregate": [{...}]` instead of `"aggregate": {...}` and `"groupby": ["Cylinders"]` instead of `"groupby": "Cylinders"`.
+In the [documentation](https://vega.github.io/vega-lite/docs/aggregate.html), we see that `aggregate` takes a `AggregatedFieldDef[]`, and `groupby` takes a `String[]`. The `[]` after each of these indicates that they should be _arrays_, not single values. That is why we use `"aggregate": [{...}]` instead of `"aggregate": {...}` and `"groupby": ["Cylinders"]` instead of `"groupby": "Cylinders"`.
 
 <img src="{{ site.baseurl }}/assets/aggregate_documentation.png" />
 
@@ -158,6 +190,8 @@ In the documentation, we see that `aggregate` takes a `AggregatedFieldDef[]`, an
   }
 }
 -->
+
+### Binning
 
 As another example, let's create a histogram of the miles per gallon. Looking at the documentation at [https://vega.github.io/vega-lite/docs/bin.html](https://vega.github.io/vega-lite/docs/bin.html), it seems that the easiest way to do this is to do this in the `encoding` section:
 
@@ -194,6 +228,8 @@ The only thing to do was to add `"bin": true` to the field that you want to bin,
   }
 }
 ```
+
+#### Additional fields are added to the data object
 
 When defining `bin` in a transform, it will create two new fields for each object: `binned_mpg` and `binned_mpg_end`. These indicate the boundaries of the bin that that object fits into. For example, the object
 

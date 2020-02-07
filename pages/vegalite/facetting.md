@@ -7,7 +7,7 @@ folder: vega-lite
 series: vegalite-series
 weight: 6
 ---
-We could already look at for example acceleration versus miles per gallon with year as colour to get a feeling of how things change over time. Another option, is to have a single plot per year.
+Based on what we've seen up until now, we can already create plots of acceleration versus miles per gallon with year as colour to get a feeling of how things change over time. Another option, is to have a single plot per year.
 
 {:.exercise}
 **Exercise** - Create a scatterplot of acceleration versus miles per gallon, with year defining the colour.
@@ -58,8 +58,26 @@ This will give you the following image:
 
 <img src="{{ site.baseurl }}/assets/vegalite-columnfacet.png" />
 
-Alternatively, you can define the facet at a higher level. According to the documentation, "to create a faceted view, define how the data should be faceted in facet and how each facet should be displayed in the spec." This adaptation we need to make is a bit different than what we did before, as we have to wrap the `mark` and `encoding` within a separate `spec` section:
+Alternatively, you can define the facet at a higher level. According to the documentation, "to create a faceted view, define how the data should be faceted in facet and how each facet should be displayed in the spec." This specification is a bit different than what we did before, as we have to wrap the `mark` and `encoding` within a separate `spec` section:
 
+```text
+{
+  "$schema": ...,
+  "data": ...,
+  "transform": [
+    ...
+  ],
+  "facet": ...,
+  "spec": {
+    "mark": ...,
+    "encoding": {
+      ...
+    }
+  }
+}
+```
+
+For example:
 ```json
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
