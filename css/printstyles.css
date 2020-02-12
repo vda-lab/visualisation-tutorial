@@ -45,6 +45,10 @@ a[href*="mailto"]::after, a[data-toggle="tooltip"]::after, a[href].noCrossRef::a
     margin-bottom:25px;
 }
 
+.printAuthor {
+  font-size: 16pt;
+}
+
 .printSubtitle {
     font-size: 19pt;
     color: #cccccc !important;
@@ -60,13 +64,8 @@ a[href*="mailto"]::after, a[data-toggle="tooltip"]::after, a[href].noCrossRef::a
 }
 
 .printTitleImage {
-    max-width:300px;
+    max-width:100px;
     margin-bottom:200px;
-}
-
-
-.printTitleImage {
-    max-width: 250px;
 }
 
 #navig {

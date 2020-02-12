@@ -16,7 +16,12 @@ entries:
       output: pdf
       type: frontmatter
 
-
+  - title: Vega landing page
+    output: web, pdf
+    folderitems:
+      - title: Vega landing page
+        url: /vega_landing_page.html
+        output: web, pdf
   - title: Creating static images
     output: web, pdf
     folderitems:
@@ -72,53 +77,53 @@ entries:
     output: web, pdf
     folderitems:
     - title: Simple interaction
-      url: vega-simple-interaction.html
+      url: /vega-simple-interaction.html
       output: web, pdf
     - title: Advanced interaction
-      url: vega-advanced-interaction.html
+      url: /vega-advanced-interaction.html
       output: web, pdf
     - title: Event streams
-      url: vega-event-streams.html
+      url: /vega-event-streams.html
       output: web, pdf
     - title: Combining event streams
-      url: vega-combining-event-streams.html
+      url: /vega-combining-event-streams.html
       output: web, pdf
     - title: Signals
-      url: vega-signals.html
+      url: /vega-signals.html
       output: web, pdf
     - title: Using widgets to send signals
-      url: vega-using-widgets-to-send-signals.html
+      url: /vega-using-widgets-to-send-signals.html
       output: web, pdf
   - title: Composing plots
     output: web, pdf
     folderitems:
     - title: Composing plots
-      url: vega-composing-plots.html
+      url: /vega-composing-plots.html
       output: web, pdf
   - title: Advanced transforms
     output: web, pdf
     folderitems:
     - title: Advanced transforms
-      url: vega-advanced-transforms.html
+      url: /vega-advanced-transforms.html
       output: web, pdf
     - title: Force-directed networks
-      url: vega-force-directed-networks.html
+      url: /vega-force-directed-networks.html
       output: web, pdf
   - title: Brushing and linking
     output: web, pdf
     folderitems:
     - title: Brushing and linking
-      url: vega-brushing-and-linking.html
+      url: /vega-brushing-and-linking.html
       output: web, pdf
   - title: Debugging
     output: web, pdf
     folderitems:
     - title: Debugging
-      url: vega-debugging.html
+      url: /vega-debugging.html
       output: web, pdf
   - title: Further exercises
     output: web, pdf
     folderitems:
     - title: Further exercises
-      url: vega-further-exercises.html
+      url: /vega-further-exercises.html
       output: web, pdf
