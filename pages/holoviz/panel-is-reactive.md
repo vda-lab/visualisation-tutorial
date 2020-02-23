@@ -6,7 +6,7 @@ toc: false
 permalink: holoviz-panel-is-reactive.html
 folder: holoviz
 series: holoviz-series
-weight: 7
+weight: 6
 ---
 One of the strong points of panel is that is reactive. As we described in the [vega tutorial]({{ site.baseurl }}/vega-advanced-interaction.html), in a reactive program any change in a variable will automatically be reflected in other variables that depend on it.
 

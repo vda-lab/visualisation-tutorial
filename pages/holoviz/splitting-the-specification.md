@@ -8,7 +8,7 @@ folder: holoviz
 series: holoviz-series
 weight: 3
 ---
-In the previous step, we created a variable `spec` that contained the complete specification for the plot. One of the reasons we're looking into using jupyter notebooks instead of the online vega editor, is that we can make a very long specification more manageable by splitting it up: we can extract different parts of the spec into separate variables.
+In the previous step, we created a variable `spec` that contained the complete specification for the plot. One of the reasons we're looking into using jupyter notebooks instead of the online vega editor, is that we can _make a very long specification more manageable by splitting it up_: we can extract different parts of the spec into separate variables.
 
 ### A simple example
 
@@ -172,7 +172,7 @@ plot2 = {
 }
 ```
 
-This makes the final specification much more uncluttered.
+This makes the final specification much more manageable:
 ```python
 spec2 = {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
@@ -187,7 +187,7 @@ spec2 = {
 }
 ```
 
-This will get us the following plot that we also created in the vega tutorial.
+The result is the following plot (that we also created in the vega tutorial).
 
 <div id="vis1"></div>
 <script type="text/javascript">

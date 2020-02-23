@@ -35,6 +35,12 @@ What you'll see is:
 ### What are the different types of panes?
 Just using markdown does not seem that interesting, but we can put other stuff in a pane as well, like images, vega code(!), etc. To find out what you can use, type `pn.pane.` and then a tab. This will show you all possibilities: bokeh, dataframe, gif, html, image, latex, plotly, svg, video, vtk, etc.
 
+### Panel and Google Colaboratory
+Google Colaboratory is a great way to use jupyter notebooks. Access them through [http://colab.research.google.com](http://colab.research.google.com) or straight from your google drive. Unfortunately, there _are_ some quirks to take into account when working with Panel.
+
+* You have to install panel and other modules every time again in your notebook with `!pip install panel`, `!pip install vega`, etc.
+* Whereas you only have to write `pn.extension()` once in a jupyter notebook, you have to do this in every cell in Colaboratory in which you use Panel.
+* You can't use the `.show()` method in Colaboratory (see [{{ site.baseurl }}/holoviz-sharing-dashboards.html]({{ site.baseurl }}/holoviz-sharing-dashboards.html)).
 
 
 

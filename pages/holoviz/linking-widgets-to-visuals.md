@@ -5,13 +5,13 @@ sidebar: holoviz_sidebar
 permalink: holoviz-linking-widgets-to-visuals.html
 folder: holoviz
 series: holoviz-series
-weight: 10
+weight: 9
 ---
 With what we've learned so far we can create dashboards that contain different graphics, bits of text, etc. But we weren't able yet to link these things together. That's what we'll do here.
 
 ### A single widget
 
-As a very first example, we'll create our simple barchart again, but include a colour picker so that we can change the colour of the bars.
+As a very first example, we'll create our simple barchart again, but include a colour picker so that we can change the colour of the bars. Notice that the vega part is exactly what we had before, except for the fact that we also define the color.
 
 ```python
 colour_picker = pn.widgets.ColorPicker(value="#4682b4")
@@ -44,7 +44,7 @@ pn.Row(colour_picker, plot)
 
 We create a `pn.Row()` with the `colour_picker` and the `plot`. How did we make this work?
 
-- The `colour_picker` is a `ColorPicker` widget. Again, for the complete list of available widgets, check the `panel` documentation at [https://panel.holoviz.org/user_guide/Widgets.html](https://panel.holoviz.org/user_guide/Widgets.html).
+- The `colour_picker` is a `ColorPicker` widget. Again, for the complete list of all 30 available widgets, check the `panel` documentation at [https://panel.holoviz.org/user_guide/Widgets.html](https://panel.holoviz.org/user_guide/Widgets.html).
 - Instead of just creating the `spec` as a JSON object, we now create a function (called `plot`) that returns such JSON.
 - We need to _decorate_ the `plot` function so that the function is re-run every time a new colour is chosen. We do this with `@pn.depends(colour_picker.param.value)`. When that `colour_picker.param.value` changes, it will be passed as the first argument to the `plot` function.
 - We replaced the actual colour in the specification with `value` which is the name of the first (and only) argument to the function.
@@ -248,6 +248,148 @@ def plot2(origin, y, threshold):
     })
 pn.Row(pn.Column(origin_picker, y_picker, threshold_picker), plot2).show()
 -->
+
+Here's another example using the Miserables dataset:
+```python
+group_picker = pn.widgets.Select(name="Select group", options=[0,1,2,3,4,5,6,7,8], width=50)
+
+@pn.depends(group_picker.param.value)
+def plot(gr):
+    return pn.pane.Vega({
+      "$schema": "https://vega.github.io/schema/vega/v5.json",
+      "width": 400,
+      "height": 275,
+      "padding": 0,
+      "autosize": "none",
+
+      "signals": [
+        { "name": "cx", "update": "width / 2" },
+        { "name": "cy", "update": "height / 2" },
+        {
+          "description": "State variable for active node dragged status.",
+          "name": "dragged", "value": 0,
+          "on": [
+            {
+              "events": "symbol:mouseout[!event.buttons], window:mouseup",
+              "update": "0"
+            },
+            {
+              "events": "symbol:mouseover",
+              "update": "dragged || 1"
+            },
+            {
+              "events": "[symbol:mousedown, window:mouseup] > window:mousemove!",
+              "update": "2", "force": True
+            }
+          ]
+        },
+        {
+          "description": "Graph node most recently interacted with.",
+          "name": "dragged_node", "value": None,
+          "on": [
+            {
+              "events": "symbol:mouseover",
+              "update": "dragged === 1 ? item() : dragged_node"
+            }
+          ]
+        },
+        {
+          "description": "Flag to restart Force simulation upon data changes.",
+          "name": "restart", "value": False,
+          "on": [
+            {"events": {"signal": "dragged"}, "update": "dragged > 1"}
+          ]
+        }
+      ],
+
+      "data": [
+        {
+          "name": "node-data",
+          "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/miserables.json",
+          "format": {"type": "json", "property": "nodes"}
+        },
+        {
+          "name": "link-data",
+          "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/miserables.json",
+          "format": {"type": "json", "property": "links"}
+        }
+      ],
+
+      "marks": [
+        {
+          "name": "nodes",
+          "type": "symbol",
+          "zindex": 1,
+
+          "from": {"data": "node-data"},
+          "on": [
+            {
+              "trigger": "dragged",
+              "modify": "dragged_node",
+              "values": "dragged === 1 ? {fx:dragged_node.x, fy:dragged_node.y} : {fx:x(), fy:y()}"
+            },
+            {
+              "trigger": "!dragged",
+              "modify": "dragged_node", "values": "{fx: null, fy: null}"
+            }
+          ],
+
+          "encode": {
+            "enter": {
+              "fill": [
+                { "test": "datum.group == " + str(gr),
+                  "value": "red"},
+                {"value": "lightgrey"}
+              ]
+            },
+            "update": {
+              "size": {"value": 50},
+              "cursor": {"value": "pointer"}
+            }
+          },
+
+          "transform": [
+            {
+              "type": "force",
+              "iterations": 300,
+              "velocityDecay": 0.4,
+              "restart": {"signal": "restart"},
+              "static": False,
+              "forces": [
+                {"force": "center", "x": {"signal": "cx"}, "y": {"signal": "cy"}},
+                {"force": "collide", "radius": 5},
+                {"force": "nbody", "strength": -10},
+                {"force": "link", "links": "link-data", "distance": 15}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "from": {"data": "link-data"},
+          "interactive": False,
+          "encode": {
+            "update": {
+              "stroke": {"value": "lightgrey"}
+            }
+          },
+          "transform": [
+            {
+              "type": "linkpath", "shape": "line",
+              "sourceX": "datum.source.x", "sourceY": "datum.source.y",
+              "targetX": "datum.target.x", "targetY": "datum.target.y"
+            }
+          ]
+        }
+      ]
+    })
+pn.Column(pn.pane.Markdown("## Highlighting Miserables dataset based on group"),
+          pn.Row(group_picker, plot))
+```
+
+The output:
+
+<img src="{{ site.baseurl }}/assets/holoviz-brushlink-miserables.png" width="50%" />
 
 
 {% include custom/series_holoviz_next.html %}

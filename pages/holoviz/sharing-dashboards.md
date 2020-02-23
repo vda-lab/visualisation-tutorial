@@ -6,7 +6,7 @@ toc: false
 permalink: holoviz-sharing-dashboards.html
 folder: holoviz
 series: holoviz-series
-weight: 9
+weight: 8
 ---
 Panel has another neat trick: it can create a dashboard that is separate from the whole jupyter notebook interface.
 

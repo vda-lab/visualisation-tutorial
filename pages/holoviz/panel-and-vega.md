@@ -6,7 +6,7 @@ toc: false
 permalink: holoviz-panel-and-vega.html
 folder: holoviz
 series: holoviz-series
-weight: 8
+weight: 7
 ---
 So let's finally combine Panel with Vega. As for creating a pane with markdown text or a figure, we can use `pn.pane.Vega()` and give it a specification.
 
@@ -19,6 +19,8 @@ pn.extension('vega')
 spec = {
     "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
     "description": "A simple bar chart with embedded data.",
+    "width": 200,
+    "height": 200,
     "data": {
       "values": [
         {"a": "A", "b": 28},
@@ -62,5 +64,9 @@ pn.Column(pn.pane.Markdown("# This is a horizontal barchart"),
 
           ))
 ```
+
+By the way, do not forget to specify `width` and `height` of the plot, because `panel` cannot deduce that automatically. If you forget to do so, you'll get overlapping panels like this:
+
+<img src="{{ site.baseurl }}/assets/holoviz-overlapping-panes.png" width="50%" />
 
 {% include custom/series_holoviz_next.html %}
