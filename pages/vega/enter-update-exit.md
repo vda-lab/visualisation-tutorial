@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-enter-update-exit.html
 folder: vega
 series: vega-series
-weight: 6
+weight: 7
 ---
 Another difference that we see with vega-lite is the use of the `enter` tag. This is a very important concept that directly drills down into [D3](http://d3js.org) which is the javascript library underneath vega. To understand the concept, we need to make a clear distinction between marks on the screen, and the data underneath.
 

@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-event-streams.html
 folder: vega
 series: vega-series
-weight: 13
+weight: 14
 ---
 As per the [documentation](https://vega.github.io/vega/docs/event-streams/): "Event streams are the primary means of modelling user input to enable dynamic, interactive visualisations. Event streams capture a **sequence of input events** such as mouse click, touch movement, timer ticks, or signal updates. When events that match a stream definition occur, they **cause any corresponding signal event handlers to evaluate**, potentially updating a signal value."
 
@@ -138,5 +138,144 @@ These event types can be applied to different _sources_: the screen (e.g. a `mou
 | `click[event.shiftKey]`    | click events with the shift key pressed            |
 
 If you know CSS, this syntax will be particularly familiar to you.
+
+{:.exercise}
+**Exercise** - Change the image above so that the number is not continuously updated, but only when you click on one of the datapoints.
+
+<!--
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "cars",
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    }
+  ],
+
+  "signals": [
+    {
+      "name": "mouseX",
+      "on": [
+        {"events":"symbol:click", "update": "event.x"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "xscale",
+      "domain": {"data": "cars", "field": "Acceleration"},
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "cars", "field": "Miles_per_Gallon"},
+      "range": "height"
+    }
+  ],
+  "axes": [
+    {"orient": "bottom", "scale": "xscale", "grid": true},
+    {"orient": "left", "scale": "yscale", "grid": true}
+  ],
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data":"cars"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "Acceleration"},
+          "y": {"scale": "yscale", "field": "Miles_per_Gallon"},
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 10},
+          "y": {"value": 10},
+          "fontSize": {"value": 42}
+        },
+        "update": {
+          "text": {"signal": "mouseX"}
+        }
+      }
+    }
+  ]
+}
+-->
+
+{:.exercise}
+**Exercise** - Change the plot so that the size of the points changes based on the horizontal position of the mouse: if the mouse is on the left of the image the points should be small, if it is on the right of the image the points should be large.
+
+<!--
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+  "data": [
+    {
+      "name": "cars",
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    }
+  ],
+  "signals": [
+    {"name": "mouseX", "on": [{"events": "mousemove", "update": "event.x"}]}
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "domain": {"data": "cars", "field": "Acceleration"},
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "cars", "field": "Miles_per_Gallon"},
+      "range": "height"
+    },
+    {
+      "name": "sizeScale",
+      "domain": [0, 1000],
+      "range": [1, 400]
+    }
+  ],
+  "axes": [
+    {"orient": "bottom", "scale": "xscale", "grid": true},
+    {"orient": "left", "scale": "yscale", "grid": true}
+  ],
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data": "cars"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "Acceleration"},
+          "y": {"scale": "yscale", "field": "Miles_per_Gallon"},
+          "fillOpacity": {"value": 0.5}
+        },
+        "update": {
+          "size": {"signal": "mouseX", "scale": "sizeScale"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 10},
+          "y": {"value": 10},
+          "fontSize": {"value": 42}
+        },
+        "update": {"text": {"signal": "mouseX"}}
+      }
+    }
+  ]
+}
+-->
 
 {% include custom/series_vega_next.html %}

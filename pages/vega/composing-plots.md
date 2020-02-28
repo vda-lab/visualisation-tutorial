@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-composing-plots.html
 folder: vega
 series: vega-series
-weight: 17
+weight: 18
 ---
 Remember in vega-lite that we could create composed plots by using `concat`, `hconcat` or `vconcat`. Vega is more powerful to create layouts involving different plots. However, it is much more difficult/verbose to do so...
 
@@ -134,7 +134,6 @@ If we want to recreate this using vega, here is the minimal specification:
     },
     {
       "type": "group",
-      "style": "cell",
       "encode": {
         "update": {
           "width":  {"value": 200},
@@ -224,7 +223,7 @@ For simplicity's sake, we left out the `colourScale` and legend. Still, the spec
       {
         "type": "group",
         "encode": {
-          "update": {
+          "enter": {
             "width": {"value": 200},
             "height": {"value": 200}
           }
@@ -265,9 +264,8 @@ For simplicity's sake, we left out the `colourScale` and legend. Still, the spec
       },
       {
         "type": "group",
-        "style": "cell",
         "encode": {
-          "update": {
+          "enter": {
             "width":  {"value": 200},
             "height": {"value": 200}
           }
@@ -315,6 +313,53 @@ For simplicity's sake, we left out the `colourScale` and legend. Still, the spec
 <img src="{{ site.baseurl }}/assets/vega-sidebyside.png" width="50%" />
 -->
 
-In vega, we need to set the `layout`, and the `marks` is itself an array of subplots (each containing another `marks`...).
+In vega, we need to set the `layout`, and the `marks` itself is an array of subplots (each containing another `marks`...). Each plot itself should have a `"type": "group"` and in most cases the `width` and `height` also need to be set (otherwise any axes will be positioned wrong). Here is the relevant part:
+
+```json
+...
+"layout": {"padding": 20},
+"marks": [
+  {
+    "type": "group",
+    "encode": {
+      "enter": {
+        "width": {"value": 200},
+        "height": {"value": 200}
+      }
+    },
+    "marks": [
+      { ... },
+      { ... }
+    ],
+    "axes": [
+      { ... },
+      { ... }      
+    ]
+  },
+  {
+    "type": "group",
+    "encode": {
+      "enter": {
+        "width": {"value": 200},
+        "height": {"value": 200}
+      }
+    },
+    "marks": [
+      { ... },
+      { ... }
+    ],
+    "axes": [
+      { ... },
+      { ... }      
+    ]
+  }
+]        
+...
+```
+
+Notice that the outermost `marks` is _not_ defined as a child of `layout`, but is a sibling (i.e. it stands _next to_ `layout`). Also: `layout` _must_ be defined, even if only with an empty value (i.e. `"layout": {}`). If not, your plots will be put on top of each other.
+
+{:.exercise}
+**Exercise** - Create a multi-plot view with 3 plots instead of two, where the plots are arranged in 2 columns.
 
 {% include custom/series_vega_next.html %}

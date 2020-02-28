@@ -43,6 +43,9 @@ entries:
     - title: Colour scales
       url: /vega-colour-scales.html
       output: web, pdf
+    - title: Banded scales
+      url: /vega-banded-scales.html
+      output: web, pdf
   - title: Enter - Update - Exit
     output: web, pdf
     folderitems:

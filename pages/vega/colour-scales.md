@@ -76,7 +76,63 @@ What we did here:
 
 The resulting plot:
 
-<img src="{{ site.baseurl }}/assets/vega-colourscheme.png" width="50%" />
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 400,
+    "height": 200,
+    "padding": 5,
+
+    "data": [
+      {
+        "name": "table",
+        "values": [
+          {"x": 15, "y": 8, "category": "A"},
+          {"x": 72, "y": 25, "category": "B"},
+          {"x": 35, "y": 44, "category": "C"},
+          {"x": 44, "y": 29, "category": "A"},
+          {"x": 24, "y": 20, "category": "B"}
+        ]
+      }
+    ],
+
+    "scales": [
+      {
+        "name": "xscale",
+        "domain": {"data": "table", "field": "x"},
+        "range": "width"
+      },
+      {
+        "name": "yscale",
+        "domain": {"data": "table", "field": "y"},
+        "range": "height"
+      },
+      {
+        "name": "colourScale",
+        "type": "ordinal",
+        "domain": {"data": "table", "field": "category"},
+        "range": {"scheme": "category10"}
+      }
+    ],
+
+    "marks": [
+      {
+        "type": "symbol",
+        "from": {"data":"table"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "xscale", "field": "x"},
+            "y": {"scale": "yscale", "field": "y"},
+            "size": {"value": 200},
+            "fill": {"scale": "colourScale", "field": "category"}
+          }
+        }
+      }
+    ]
+  };
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
 
 As you can see, the points with the same category get the same colour.
 
@@ -98,7 +154,63 @@ and change the `field` in `encoding` -> `fill` from `category` to `x`.
 
 You'll get this image:
 
-<img src="{{ site.baseurl }}/assets/vega-bluecolourscale.png" width="50%" />
+<div id="vis2"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 400,
+    "height": 200,
+    "padding": 5,
+
+    "data": [
+      {
+        "name": "table",
+        "values": [
+          {"x": 15, "y": 8, "category": "A"},
+          {"x": 72, "y": 25, "category": "B"},
+          {"x": 35, "y": 44, "category": "C"},
+          {"x": 44, "y": 29, "category": "A"},
+          {"x": 24, "y": 20, "category": "B"}
+        ]
+      }
+    ],
+
+    "scales": [
+      {
+        "name": "xscale",
+        "domain": {"data": "table", "field": "x"},
+        "range": "width"
+      },
+      {
+        "name": "yscale",
+        "domain": {"data": "table", "field": "y"},
+        "range": "height"
+      },
+      {
+        "name": "colourScale",
+        "type": "linear",
+        "domain": {"data": "table", "field": "x"},
+        "range": {"scheme": "blues"}
+      }
+    ],
+
+    "marks": [
+      {
+        "type": "symbol",
+        "from": {"data":"table"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "xscale", "field": "x"},
+            "y": {"scale": "yscale", "field": "y"},
+            "size": {"value": 200},
+            "fill": {"scale": "colourScale", "field": "x"}
+          }
+        }
+      }
+    ]
+  };
+  vegaEmbed('#vis2', yourVlSpec);
+</script>
 
 {:.exercise}
 **Exercise** - We use `x` both in the definition of `colourScale` and as the `field` in the `encoding`. What would it mean if we'd use `x` in the definition of `colourScale`, but `y` in the `encoding`?

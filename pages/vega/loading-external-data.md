@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-loading-external-data.html
 folder: vega
 series: vega-series
-weight: 9
+weight: 10
 ---
 As much as it's easy, it can become unwieldy to have the actual dataset entered into the vega specification itself. As with vega-lite, we can let vega load data from an external URL. There are some differences with vega-lite, though:
 - In vega-lite, the `data` pragma takes an object (`{}`) as its value; in vega, it is an array (`[]`).
@@ -88,7 +88,52 @@ Here is a minimal scatterplot using this car data:
 
 The result:
 
-<img src="{{ site.baseurl }}/assets/vega-externaldata.png" width="50%" />
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 400,
+    "height": 200,
+    "padding": 5,
+
+    "data": [
+      {
+        "name": "cars",
+        "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+      }
+    ],
+
+    "scales": [
+      {
+        "name": "xscale",
+        "domain": {"data": "cars", "field": "Acceleration"},
+        "range": "width"
+      },
+      {
+        "name": "yscale",
+        "domain": {"data": "cars", "field": "Miles_per_Gallon"},
+        "range": "height"
+      }
+    ],
+    "axes": [
+      {"orient": "bottom", "scale": "xscale", "grid": true},
+      {"orient": "left", "scale": "yscale", "grid": true}
+    ],
+    "marks": [
+      {
+        "type": "symbol",
+        "from": {"data":"cars"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "xscale", "field": "Acceleration"},
+            "y": {"scale": "yscale", "field": "Miles_per_Gallon"}
+          }
+        }
+      }
+    ]
+  };
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
 
 {:.exercise}
 **Exercise** - Add a plot title, legend and axis titles to this plot, and make the dots more transparent so that we can see where points are plotted on top of each other. It should look like this:<br/><img src="{{ site.baseurl }}/assets/vega-titleexercise.png" width="50%" />

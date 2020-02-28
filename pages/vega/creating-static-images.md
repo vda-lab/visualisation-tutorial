@@ -168,4 +168,11 @@ What differences do we see in vega?
 - In the `marks` section we need to specify the data used by name.
 - We have to define `scales` that we can use in the encoding.
 
+### Vega-lite is a layer on top of vega
+As mentioned before, vega-lite is just a layer on top of vega, which we can use this to our advantage here. When you open a vega-lite specification in the online editor, you'll see a bar "Compiled Vega" in the bottom left. Clicking on this will give you the vega specification.
+
+![]({{site.baseurl}}/assets/vega-from-vegalite.png)
+
+If you know how to do something in vega-lite but not in vega, this will provide valuable information!
+
 {% include custom/series_vega_next.html %}

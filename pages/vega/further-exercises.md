@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-further-exercises.html
 folder: vega
 series: vega-series
-weight: 22
+weight: 23
 ---
 
 For the exercises below and similar to the further exercises for vega-lite, we will use the New York City citibike data available from [https://www.citibikenyc.com/system-data](https://www.citibikenyc.com/system-data). Some great [visuals by Juan Francisco Saldarriaga](https://juanfrans.com/2014/01/01/CitibikeRebalancing.html) can inspire you.

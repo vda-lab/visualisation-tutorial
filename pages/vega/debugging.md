@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-debugging.html
 folder: vega
 series: vega-series
-weight: 21
+weight: 22
 ---
 Debugging in vega is not straightforward. As vega is a declarative language, we cannot add `console.log()` or `print` statements throughout the code to find out what is going on. Below are some methods that can help you figure out what the system is doing.
 

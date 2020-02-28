@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-using-widgets-to-send-signals.html
 folder: vega
 series: vega-series
-weight: 16
+weight: 17
 ---
 Sometimes it'd be nice to make a plot interactive so that you can set parameters without having to dive into the vega specification. We can use signals for this.
 
@@ -386,5 +386,142 @@ We can also hide the datapoints that do not comply to a given filter, e.g. on nu
   ]
 }
 -->
+
+{:.exercise}
+**Exercise** - Add a slider with which you can change the size of the dots in the plot.
+
+<!--
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 400,
+    "height": 200,
+    "padding": 5,
+
+    "data": [
+      {
+        "name": "cars",
+        "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+      }
+    ],
+    "signals": [
+      {
+        "name": "colourSelector",
+        "bind": {"input": "select", "options": ["black","steelblue","red"]},
+        "value": "red"
+      },
+      {
+        "name": "sizeSlider",
+        "bind": {"input": "range", "min": 20, "max": 200, "step": 1},
+        "value": 4
+      },
+      {
+        "name": "test"
+      }
+    ],
+    "scales": [
+      {
+        "name": "xscale",
+        "domain": {"data": "cars", "field": "Acceleration"},
+        "range": "width"
+      },
+      {
+        "name": "yscale",
+        "domain": {"data": "cars", "field": "Miles_per_Gallon"},
+        "range": "height"
+      }
+    ],
+    "axes": [
+      {"orient": "bottom", "scale": "xscale", "grid": true},
+      {"orient": "left", "scale": "yscale", "grid": true}
+    ],
+    "marks": [
+      {
+        "type": "symbol",
+        "from": {"data":"cars"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "xscale", "field": "Acceleration"},
+            "y": {"scale": "yscale", "field": "Miles_per_Gallon"},
+            "fillOpacity": {"value": 0.5}
+          },
+          "update": {
+            "fill": {"signal": "colourSelector"},
+            "size": {"signal": "sizeSlider"}
+          }
+        }
+      }
+    ]
+  }
+-->
+
+{:.exercise}
+**Exercise** - Adapt the last example above (with the cylinderSelector) so that all datapoints remain visible with low opacity and grey, but the ones that have that particular number of cylinders have high opacity and are in the colour that is defined by the dropdown menu.
+
+<!--
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+  "data": [
+    {
+      "name": "cars",
+      "url": "https://raw.githubusercontent.com/vega/vega/master/docs/data/cars.json"
+    }
+  ],
+  "signals": [
+    {
+      "name": "colourSelector",
+      "bind": {"input": "select", "options": ["black", "steelblue", "red"]},
+      "value": "red"
+    },
+    {
+      "name": "cylinderSelector",
+      "bind": {"input": "range", "min": 3, "max": 8, "step": 1},
+      "value": 4
+    },
+    {"name": "test"}
+  ],
+  "scales": [
+    {
+      "name": "xscale",
+      "domain": {"data": "cars", "field": "Acceleration"},
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "cars", "field": "Miles_per_Gallon"},
+      "range": "height"
+    }
+  ],
+  "axes": [
+    {"orient": "bottom", "scale": "xscale", "grid": true},
+    {"orient": "left", "scale": "yscale", "grid": true}
+  ],
+  "marks": [
+    {
+      "type": "symbol",
+      "from": {"data": "cars"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "Acceleration"},
+          "y": {"scale": "yscale", "field": "Miles_per_Gallon"}
+        },
+        "update": {
+          "fill": {
+            "signal": "datum.Cylinders == cylinderSelector ? colourSelector : 'grey'"
+          },
+          "fillOpacity": {
+            "signal": "datum.Cylinders == cylinderSelector ? 0.8 : 0.2"
+          }
+        }
+      }
+    }
+  ]
+}
+-->
+
+{:.exercise}
+**Exercise** - If you didn't use the signal debugger ("Record signal changes") in the exercises above, have a look at what information it can give you in the last exercise.
 
 {% include custom/series_vega_next.html %}

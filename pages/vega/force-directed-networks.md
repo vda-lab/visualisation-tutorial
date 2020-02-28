@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-force-directed-networks.html
 folder: vega
 series: vega-series
-weight: 19
+weight: 20
 ---
 Let's start with a node-link diagram for a network. We'll use the miserables dataset for this.
 
@@ -90,7 +90,85 @@ Here's a minimal vega specification, without colours or dragging:
 
 This is what the plot looks like:
 
-<img src="{{ site.baseurl }}/assets/vega-force-1.png" width="50%" />
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 350,
+    "height": 250,
+    "padding": 0,
+    "autosize": "none",
+
+    "signals": [
+      { "name": "cx", "update": "width / 2" },
+      { "name": "cy", "update": "height / 2" }
+    ],
+
+    "data": [
+      {
+        "name": "node-data",
+        "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/miserables.json",
+        "format": {"type": "json", "property": "nodes"}
+      },
+      {
+        "name": "link-data",
+        "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/miserables.json",
+        "format": {"type": "json", "property": "links"}
+      }
+    ],
+
+    "marks": [
+      {
+        "name": "nodes",
+        "type": "symbol",
+        "zindex": 1,
+
+        "from": {"data": "node-data"},
+
+        "encode": {
+          "enter": {
+            "fill": {"value": "grey"}
+          }
+        },
+
+        "transform": [
+          {
+            "type": "force",
+            "iterations": 300,
+            "velocityDecay": 0.4,
+            "forces": [
+              {"force": "center", "x": {"signal": "cx"}, "y": {"signal": "cy"}},
+              {"force": "collide", "radius": 5},
+              {"force": "nbody", "strength": -10},
+              {"force": "link", "links": "link-data", "distance": 15}
+            ]
+          }
+        ]
+      },
+      {
+        "type": "path",
+        "from": {"data": "link-data"},
+        "interactive": false,
+        "encode": {
+          "update": {
+            "stroke": {"value": "lightgrey"},
+            "strokeWidth": {"value": 0.5}
+          }
+        },
+        "transform": [
+          {
+            "type": "linkpath", "shape": "line",
+            "sourceX": "datum.source.x", "sourceY": "datum.source.y",
+            "targetX": "datum.target.x", "targetY": "datum.target.y"
+          }
+        ]
+      }
+    ]
+  };
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
+
+<!-- <img src="{{ site.baseurl }}/assets/vega-force-1.png" width="50%" /> -->
 
 Let's break this down:
 
@@ -103,7 +181,7 @@ Let's break this down:
       * `nbody`: To what extent should nodes be pushed apart or attracted. A negative value will push them apart; a positive one will pull them together. This value will have the largest impact on what your plot looks like.
       * `link`: While `nbody` will push nodes apart or attract them, this is contrained by the links between them.
   * For the _links_, we use `path` marks instead of `line` because the first can have arbitrary position, while lines are used for longitudinal data.
-    * We set `stroke` and `strokeWidth` in an `update` section instead of `enter`. If we'd use enter, the paths wouldn't update when the nodes move around. You'd get a picture like this instead:<br/><img src="{{site.baseurl}}/assets/vega-force-link-enter.png" width="50%"/>
+    * We set `stroke` and `strokeWidth` in an `update` section instead of `enter`. If we'd use enter, the paths wouldn't update when the nodes move around. You'd get a picture like this instead:<br/><img src="{{site.baseurl}}/assets/vega-force-link-enter.png" width="25%"/>
     * `transform`: We use the special `linkpath` transform, which is specifically for drawing a path between a source and a target. Apart from `line`, the `shape` can also be a `curve`, `arc`, `diagonal` or `orthogonal`. Try these out as well.
 
 Here are some examples of plots with different settings for `collide`, `nbody` and `link` in the node transform:
@@ -112,19 +190,19 @@ Altering `collide`, with `nbody` equal to `-10` and `link` equal to `15`:
 
 | `1` | `5` | `10` |
 |--|--|--|
-| <img src="{{ site.baseurl }}/assets/vega-force-1-10-15.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-10-10-15.png" width="100%" /> |
+| <img src="{{ site.baseurl }}/assets/vega-force-1-10-15.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-10-10-15.png" width="25%" /> |
 
 Altering `nbody`, with `collide` equal to `5` and `link` equal to `15`:
 
 | `-2` | `-10` | `-20` |
 |--|--|--|
-| <img src="{{ site.baseurl }}/assets/vega-force-5-2-15.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-20-15.png" width="100%" /> |
+| <img src="{{ site.baseurl }}/assets/vega-force-5-2-15.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-20-15.png" width="25%" /> |
 
 Altering `link`, with `collide` equal to `5` and `nbody` equal to `-10`:
 
 | `5` | `15` | `30` |
 |--|--|--|
-| <img src="{{ site.baseurl }}/assets/vega-force-5-10-5.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="100%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-30.png" width="100%" /> |
+| <img src="{{ site.baseurl }}/assets/vega-force-5-10-5.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-15.png" width="25%" /> | <img src="{{ site.baseurl }}/assets/vega-force-5-10-30.png" width="25%" /> |
 
 {:.exercise}
 **Exercise** - What happens if you change the value of `nbody` to 1? Or to 10? Does the value of `collide` have an effect? If so: what effect?

@@ -1,0 +1,238 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 800,
+  "height": 400,
+  "padding": 0,
+  "autosize": "none",
+
+  "signals": [
+    { "description": "Any datapoint is activated",
+      "name": "datapoint_is_activated", "value": false,
+      "on": [
+        {
+          "events": "symbol:mouseover",
+          "update": "true"
+        },
+        {
+          "events": "symbol:mouseout",
+          "update": "false"
+        }
+      ]
+    },
+    { "description": "Active datapoint",
+      "name": "activated_datapoint", "value": null,
+      "on": [
+        {
+          "events": "symbol:mouseover",
+          "update": "item()"
+        },
+        {
+          "events": "symbol:mouseout",
+          "update": "null"
+        }
+      ]
+    },
+    { "name": "cx", "update": "600" },
+    { "name": "cy", "update": "height / 2" },
+    {
+      "description": "State variable for active node dragged status.",
+      "name": "dragged", "value": 0,
+      "on": [
+        {
+          "events": "symbol:mouseout[!event.buttons], window:mouseup",
+          "update": "0"
+        },
+        {
+          "events": "symbol:mouseover",
+          "update": "dragged || 1"
+        },
+        {
+          "events": "[symbol:mousedown, window:mouseup] > window:mousemove!",
+          "update": "2", "force": true
+        }
+      ]
+    },
+    {
+      "description": "Graph node most recently interacted with.",
+      "name": "dragged_node", "value": null,
+      "on": [
+        {
+          "events": "symbol:mouseover",
+          "update": "dragged === 1 ? item() : dragged_node"
+        }
+      ]
+    },
+    {
+      "description": "Flag to restart Force simulation upon data changes.",
+      "name": "restart", "value": false,
+      "on": [
+        {"events": {"signal": "dragged"}, "update": "dragged > 1"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "linear",
+      "domain": {"data": "node-data", "field": "community"},
+      "range": [100, 300]
+    },
+    {
+      "name": "yscale",
+      "type": "linear",
+      "domain": {"data": "node-data", "field": "hadm_id"},
+      "range": [200, 50]
+    },
+    {"name": "colourScale",
+      "type": "ordinal",
+      "domain": {"data": "node-data", "field": "community"},
+      "range": {"scheme": "category20"}
+    }
+  ],
+
+  "data": [
+    {
+      "name": "node-data",
+      "url": "https://vda-lab.github.io/assets/stad_2910.json",
+      "format": {"type": "json", "property": "nodes"}
+    },
+    {
+      "name": "link-data",
+      "url": "https://vda-lab.github.io/assets/stad_2910.json",
+      "format": {"type": "json", "property": "links"}
+    }
+  ],
+  "marks": [
+    { "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 200},
+          "height": {"value": 200}
+        }
+      },
+      "marks": [
+        { "name": "nodes",
+          "type": "symbol",
+          "zindex": 1,
+
+          "from": {"data": "node-data"},
+          "on": [
+            {
+              "trigger": "dragged",
+              "modify": "dragged_node",
+              "values": "dragged === 1 ? {fx:dragged_node.x, fy:dragged_node.y} : {fx:x(), fy:y()}"
+            },
+            {
+              "trigger": "!dragged",
+              "modify": "dragged_node", "values": "{fx: null, fy: null}"
+            }
+          ],
+
+          "encode": {
+            "enter": {
+              "fill": {"value": "grey"},
+              "fillOpacity": {"value": 0.8}
+            },
+            "update": {
+              "zindex": [
+                { "test": "datapoint_is_activated && datum === activated_datapoint.datum", "value": -1 }
+              ],
+              "size": [
+                    {"test": "datapoint_is_activated && datum === activated_datapoint.datum",
+                    "value": 200},
+                    {"value": 50}
+                  ],
+              "cursor": {"value": "pointer"},
+              "fill": [
+                    {"test": "datapoint_is_activated && datum === activated_datapoint.datum",
+                    "value": "red"},
+                    {"field": "community", "scale": "colourScale"}
+                  ]
+            }
+          },
+
+          "transform": [
+            {
+              "type": "force",
+              "iterations": 300,
+              "velocityDecay": 0.4,
+              "restart": {"signal": "restart"},
+              "static": false,
+              "forces": [
+                {"force": "center", "x": {"signal": "cx"}, "y": {"signal": "cy"}},
+                {"force": "collide", "radius": 2},
+                {"force": "nbody", "strength": -1},
+                {"force": "link", "links": "link-data", "distance": 5}
+              ]
+            }
+          ]
+        },
+        { "type": "path",
+          "from": {"data": "link-data"},
+          "interactive": false,
+          "encode": {
+            "update": {
+              "stroke": {"value": "lightgrey"}
+            }
+          },
+          "transform": [
+            {
+              "type": "linkpath", "shape": "line",
+              "sourceX": "datum.source.x", "sourceY": "datum.source.y",
+              "targetX": "datum.target.x", "targetY": "datum.target.y"
+            }
+          ]
+        }
+      ]
+    },
+    { "type": "group",
+      "encode": {
+        "update": {
+          "width": {"value": 200},
+          "height": {"value": 200}
+        }
+      },
+      "marks": [
+        { "type": "symbol",
+          "from": {"data": "node-data"},
+          "encode": {
+            "enter": {
+              "x": {"field": "community", "scale": "xscale"},
+              "y": {"field": "hadm_id", "scale": "yscale"},
+              "tooltip": {"field": "hadm_id"}
+            },
+            "update": {
+              "zindex": [
+                { "test": "datapoint_is_activated && datum === activated_datapoint.datum", "value": -1 }
+              ],
+              "fill": [
+                    {"test": "datapoint_is_activated && datum === activated_datapoint.datum",
+                    "value": "red"},
+                    {"field": "community", "scale": "colourScale"}
+                  ],
+              "size": [
+                    {"test": "datapoint_is_activated && datum === activated_datapoint.datum",
+                    "value": 200},
+                    {"value": 50}
+                  ]
+            }
+          }
+        }
+      ],
+      "axes": [
+        {
+          "scale": "xscale",
+          "orient": "bottom",
+          "title": "Community"
+        },
+        {
+          "scale": "yscale",
+          "orient": "right",
+          "offset": {"value": 120},
+          "title": "hadm_id"
+        }
+      ]
+    }
+  ]
+}
