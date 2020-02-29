@@ -522,6 +522,9 @@ We can also hide the datapoints that do not comply to a given filter, e.g. on nu
 -->
 
 {:.exercise}
-**Exercise** - If you didn't use the signal debugger ("Record signal changes") in the exercises above, have a look at what information it can give you in the last exercise.
+**Exercise** - If you didn't use the signal debugger ("Record signal changes") in the exercises above, try it out now and have a look at what information it can give you in the last exercise.
+
+{:.exercise}
+**Exercise** - See if you can use the kernel density estimation approach from before with these exercises.
 
 {% include custom/series_vega_next.html %}
