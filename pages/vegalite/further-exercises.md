@@ -7,6 +7,52 @@ folder: vega-lite
 series: vegalite-series
 weight: 15
 ---
+### Advanced exercise 1
+
+A first more involved exercise is to create a map of flight routes for all airports. The data (which you can use in the `url` part) is available here: [https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv](https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv).
+
+What we want you to plot is:
+- the location of the departure airport for each route
+- in blue if flights are domestic, in red if they are international
+- the size of the dot should depend on the distance of the flight: the longer the flight, the larger the dot
+
+<div id="vis1"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 600,
+  "height": 300,
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "url": "https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv"
+  },
+  "transform": [
+    {"calculate": "datum.from_country == datum.to_country", "as": "domestic"}
+  ],
+  "mark": "circle",
+  "encoding": {
+    "x": {"field": "from_long", "type": "quantitative"},
+    "y": {"field": "from_lat", "type": "quantitative"},
+    "opacity": {"value": 0.05},
+    "tooltip": {"field": "from_airport", "type":"nominal"},
+    "color": {
+      "condition": {
+        "test": "datum.domestic",
+        "value": "blue"
+      },
+      "value": "red"
+    },
+    "size": {
+      "field": "distance",
+      "scale": {"domain": [1, 15460], "range": [10,100]}
+    }
+  }
+};
+  vegaEmbed('#vis1', yourVlSpec);
+</script>
+
+### Advanced exercise 2
+
 For the exercises below, we will use the New York City citibike data available from [https://www.citibikenyc.com/system-data](https://www.citibikenyc.com/system-data). Some great [visuals by Juan Francisco Saldarriaga](https://juanfrans.com/projects/citibikeRebalancing.html) can inspire you.
 
 <img src="{{ site.baseurl }}/assets/citibike_linegraph.png" />
