@@ -16,38 +16,56 @@ What we want you to plot is:
 - in blue if flights are domestic, in red if they are international
 - the size of the dot should depend on the distance of the flight: the longer the flight, the larger the dot
 
+Extra point if you add the slider as well: sliding to the left only shows the short distance flights, sliding to the right only the long distance ones.
+
 <div id="vis1"></div>
 <script type="text/javascript">
   var yourVlSpec = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "width": 600,
-  "height": 300,
-  "description": "A simple bar chart with embedded data.",
-  "data": {
-    "url": "https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv"
-  },
-  "transform": [
-    {"calculate": "datum.from_country == datum.to_country", "as": "domestic"}
-  ],
-  "mark": "circle",
-  "encoding": {
-    "x": {"field": "from_long", "type": "quantitative"},
-    "y": {"field": "from_lat", "type": "quantitative"},
-    "opacity": {"value": 0.05},
-    "tooltip": {"field": "from_airport", "type":"nominal"},
-    "color": {
-      "condition": {
-        "test": "datum.domestic",
-        "value": "blue"
-      },
-      "value": "red"
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "width": 600,
+    "height": 300,
+    "title": "Flight routes",
+    "description": "A simple bar chart with embedded data.",
+    "data": {
+      "url": "https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv"
     },
-    "size": {
-      "field": "distance",
-      "scale": {"domain": [1, 15460], "range": [10,100]}
+    "selection": {
+      "range_selection": {
+        "type": "single",
+        "fields": ["distance"],
+        "bind": {"input": "range", "min": 3, "max": 15000, "step": 100}
+      }
+    },
+    "transform": [
+      {"calculate": "datum.from_country == datum.to_country", "as": "domestic"},
+      {"calculate": "range_selection_distance -1000 < datum.distance && datum.distance < range_selection_distance +1000", "as": "inrange"}
+    ],
+    "mark": "circle",
+    "encoding": {
+      "x": {"field": "from_long", "type": "quantitative"},
+      "y": {"field": "from_lat", "type": "quantitative"},
+      "opacity": {
+        "condition": {
+          "test": "datum.inrange",
+          "value": 0.05
+        },
+        "value": 0
+      },
+      "tooltip": {"field": "from_airport", "type":"nominal"},
+      "color": {
+        "condition": {
+          "test": "datum.domestic",
+          "value": "blue"
+        },
+        "value": "red"
+      },
+      "size": {
+        "field": "distance",
+        "type": "quantitative",
+        "scale": {"domain": [1, 15460], "range": [10,100]}
+      }
     }
-  }
-};
+  };
   vegaEmbed('#vis1', yourVlSpec);
 </script>
 
