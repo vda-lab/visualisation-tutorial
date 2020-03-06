@@ -38,31 +38,38 @@ Extra point if you add the slider as well: sliding to the left only shows the sh
     },
     "transform": [
       {"calculate": "datum.from_country == datum.to_country", "as": "domestic"},
-      {"calculate": "range_selection_distance -1000 < datum.distance && datum.distance < range_selection_distance +1000", "as": "inrange"}
+      {
+        "aggregate": [{
+         "op": "max",
+         "field": "distance",
+         "as": "max_distance"
+        }],
+        "groupby": ["from_airport", "from_long", "from_lat", "domestic"]
+      },
+      {
+        "calculate": "range_selection_distance -1000 < datum.max_distance && datum.max_distance < range_selection_distance +1000",
+        "as": "inrange"
+      }
     ],
     "mark": "circle",
     "encoding": {
       "x": {"field": "from_long", "type": "quantitative"},
       "y": {"field": "from_lat", "type": "quantitative"},
       "opacity": {
-        "condition": {
-          "test": "datum.inrange",
-          "value": 0.05
-        },
-        "value": 0
+        "condition": {"test": "datum.inrange", "value": 0.3},
+        "value": 0.1
       },
-      "tooltip": {"field": "from_airport", "type":"nominal"},
+      "tooltip": {"field": "from_airport", "type": "nominal"},
       "color": {
-        "condition": {
-          "test": "datum.domestic",
-          "value": "blue"
-        },
+        "condition": {"test": "datum.domestic", "value": "blue"},
         "value": "red"
       },
       "size": {
-        "field": "distance",
-        "type": "quantitative",
-        "scale": {"domain": [1, 15460], "range": [10,100]}
+        "condition": {"test": "datum.inrange",
+                      "field": "max_distance",
+                      "type": "quantitative",
+                      "scale": {"domain": [1, 15460], "range": [10, 100]} },
+        "value": 5
       }
     }
   };
