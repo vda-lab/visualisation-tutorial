@@ -76,6 +76,74 @@ Extra point if you add the slider as well: sliding to the left only shows the sh
   vegaEmbed('#vis1', yourVlSpec);
 </script>
 
+Or even add a histogram:
+
+<div id="vis2"></div>
+<script type="text/javascript">
+  var yourVlSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "width": 600,
+    "height": 500,
+    "title": "Flight routes",
+    "description": "A simple bar chart with embedded data.",
+    "data": {
+      "url": "https://gist.githubusercontent.com/jandot/93963d2f7f80baae925c35d44f5c1fd1/raw/ca66d98561d9ab1dcca90e55b1ac6782e71bf3a6/flight_routes.csv"
+    },
+    "transform": [
+      {"calculate": "datum.from_country == datum.to_country", "as": "domestic"},
+      {
+        "aggregate": [{
+         "op": "max",
+         "field": "distance",
+         "as": "max_distance"
+        }],
+        "groupby": ["from_airport", "from_long", "from_lat", "domestic"]
+      }
+    ],
+    "vconcat": [
+      { "description": "map",
+        "width": 600,
+        "height": 300,
+        "mark": "circle",
+        "encoding": {
+          "x": {"field": "from_long", "type": "quantitative"},
+          "y": {"field": "from_lat", "type": "quantitative"},
+          "opacity": {
+            "condition": {"selection": "my_selection", "value": 0.5},
+            "value": 0.2
+          },
+          "tooltip": {"field": "from_airport", "type": "nominal"},
+          "color": {
+            "condition": {"test": "datum.domestic", "value": "blue"},
+            "value": "red"
+          },
+          "size": {
+            "condition": {"selection": "my_selection",
+                          "field": "max_distance",
+                          "type": "quantitative",
+                          "scale": {"domain": [1, 15460], "range": [10, 100]} },
+            "value": 5
+          }
+        }
+      },
+      { "description": "histogram",
+        "width": 600,
+        "height": 100,
+        "selection": {
+          "my_selection": {"type": "interval", "empty": "none"}
+        },
+        "mark": "bar",
+        "encoding": {
+          "x": {"bin": {"step": 100}, "field": "max_distance", "type": "quantitative"},
+          "y": {"aggregate": "count", "type": "quantitative"},
+          "color": {"value": "steelblue"}
+        }
+      }
+    ]
+  };
+  vegaEmbed('#vis2', yourVlSpec);
+</script>
+
 ### Advanced exercise 2
 
 For the exercises below, we will use the New York City citibike data available from [https://www.citibikenyc.com/system-data](https://www.citibikenyc.com/system-data). Some great [visuals by Juan Francisco Saldarriaga](https://juanfrans.com/projects/citibikeRebalancing.html) can inspire you.
