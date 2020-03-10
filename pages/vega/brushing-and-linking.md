@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-brushing-and-linking.html
 folder: vega
 series: vega-series
-weight: 21
+weight: 22
 ---
 Whereas brushing and linking in vega-lite is very simple to do, it is very hard in vega. Although it _is_ possible, you'll have to play with signals, data, and some non-documented functions within the vega code. Hopefully, brushing/linking will be easier in one of the next versions.
 

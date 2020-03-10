@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-composing-plots.html
 folder: vega
 series: vega-series
-weight: 18
+weight: 19
 ---
 Remember in vega-lite that we could create composed plots by using `concat`, `hconcat` or `vconcat`. Vega is more powerful to create layouts involving different plots. However, it is much more difficult/verbose to do so...
 

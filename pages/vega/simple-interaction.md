@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-simple-interaction.html
 folder: vega
 series: vega-series
-weight: 12
+weight: 13
 ---
 You do get some interaction for free with vega, including tooltips, effects on hover, etc.
 

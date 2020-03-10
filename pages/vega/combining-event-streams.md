@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-combining-event-streams.html
 folder: vega
 series: vega-series
-weight: 15
+weight: 16
 ---
 Often you will want to filter event _streams_ (e.g. to throttle them so that you only get a signal every 5 seconds or so), or combine them.
 

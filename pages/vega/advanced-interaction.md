@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-advanced-interaction.html
 folder: vega
 series: vega-series
-weight: 13
+weight: 14
 ---
 Vega uses the _reactive_ paradigm for interactivity. In reactive programming, the whole of the program is constantly re-evaluated: if a variable changes all other variables that depend on it are _automatically_ updated. This is in contrast to non-reactive programming, where we have to run those dependent variables again.
 

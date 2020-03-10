@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-force-directed-networks.html
 folder: vega
 series: vega-series
-weight: 20
+weight: 21
 ---
 Let's start with a node-link diagram for a network. We'll use the miserables dataset for this.
 

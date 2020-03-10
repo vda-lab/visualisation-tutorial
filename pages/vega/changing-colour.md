@@ -1,8 +1,8 @@
 ---
-title: Changing colour
+title: Changing attributes
 keywords: vega
 sidebar: vega_sidebar
-permalink: vega-changing-colour.html
+permalink: vega-changing-attributes.html
 folder: vega
 series: vega-series
 weight: 2
@@ -23,5 +23,7 @@ The points in the plot above are blue. In vega-lite, we'd just add `"color": {"v
 
 {:.exercise}
 **Exercise** - Let's try to have the colour of each point be dependent on the data itself. Change the data so that each datapoint also has some colour assigned to it (e.g. `{"x": 15, "y": 8, "c": "yellow"},`) and adjust the encoding to use this colour.
+
+
 
 {% include custom/series_vega_next.html %}

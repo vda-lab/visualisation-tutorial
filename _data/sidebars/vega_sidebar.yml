@@ -28,8 +28,8 @@ entries:
     - title: A simple scatterplot
       url: /vega-simple-scatterplot.html
       output: web, pdf
-    - title: Changing colour
-      url: /vega-changing-colour.html
+    - title: Changing attributes
+      url: /vega-changing-attributes.html
       output: web, pdf
     - title: Data-independent-marks
       url: /vega-data-independent-marks.html
@@ -73,8 +73,11 @@ entries:
   - title: Transforms
     output: web, pdf
     folderitems:
-    - title: Transforms
-      url: /vega-transforms.html
+    - title: Filter and aggregate
+      url: /vega-transforms-filteraggregate.html
+      output: web, pdf
+    - title: Custom visual designs
+      url: /vega-transforms-customdesigns.html
       output: web, pdf
   - title: Interaction
     output: web, pdf

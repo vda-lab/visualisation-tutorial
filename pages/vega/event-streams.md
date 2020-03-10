@@ -5,7 +5,7 @@ sidebar: vega_sidebar
 permalink: vega-event-streams.html
 folder: vega
 series: vega-series
-weight: 14
+weight: 15
 ---
 As per the [documentation](https://vega.github.io/vega/docs/event-streams/): "Event streams are the primary means of modelling user input to enable dynamic, interactive visualisations. Event streams capture a **sequence of input events** such as mouse click, touch movement, timer ticks, or signal updates. When events that match a stream definition occur, they **cause any corresponding signal event handlers to evaluate**, potentially updating a signal value."
 

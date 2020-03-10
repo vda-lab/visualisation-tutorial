@@ -1,8 +1,8 @@
 ---
-title: Transforms
+title: Filter and aggregate
 keywords: vega
 sidebar: vega_sidebar
-permalink: vega-transforms.html
+permalink: vega-transforms-filteraggregate.html
 folder: vega
 series: vega-series
 weight: 11
