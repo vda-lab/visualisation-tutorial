@@ -88,7 +88,7 @@ This will give you the following:
 For axes, you must provide the orientation (whether `top`, `bottom`, `left` or `right`), and the scale that decides where the ticks should come.
 
 {:.exercise}
-**Exercise** - Add these axes to your plot, but also add axis titles and grid lines.
+**Exercise** - Add these axes to the plot you created in the "colour scales" section, but also add axis titles and grid lines.
 
 <!--
 {

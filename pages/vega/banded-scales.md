@@ -129,7 +129,4 @@ One of the types of scales is the `band`. From the documentation: "_Band scales 
 {:.exercise}
 **Exercise** - Add the colour legend to this plot.
 
-{:.exercise}
-**Exercise** - Recreate this heatmap using regular rectangles as we would have done before.
-
 {% include custom/series_vega_next.html %}
