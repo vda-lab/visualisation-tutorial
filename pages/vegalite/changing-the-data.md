@@ -65,9 +65,6 @@ So it is an _array_ (`[]`) of _objects_ (`{}`) where each object is a car for wh
 
 Using a public online dataset like the one above is simple. But how can you access your own data? What if you have an Excel file with data that you want to visualise?
 
-##### Conversion to JSON
-Although you can load comma-separated and tab-separated files into vega, it might be interesting to first convert these to JSON. You can do this yourself, or use a tool such as [https://www.csvjson.com/csv2json](https://www.csvjson.com/csv2json).
-
 #### Gist
 If your data is not sensitive, you can use github "gists" at [https://gist.github.com/](https://gist.github.com/). This provides you with a space where you can upload your csv or json data and will return a URL that you can use as we did above.
 
@@ -76,6 +73,8 @@ The URL to use should be the one that you see after you clicked the button named
 For example:
 
 <img src="{{site.baseurl}}/assets/vegalite-gists.png" width="50%"/>
+
+[Here](https://help.github.com/en/github/writing-on-github/creating-gists) is information how to create new gists.
 
 #### In an IDE
 Another option is to use an IDE (integrated development environment) or code editor which can interpret vega specifications. The [atom](https://atom.io/) editor, for example, has a [vega-preview package](https://atom.io/packages/vega-preview). In this case, you don't have to upload your data to an external website. Instead, you can use `file://` as part of the url instead of `http://`
