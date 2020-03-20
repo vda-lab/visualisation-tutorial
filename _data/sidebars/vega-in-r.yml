@@ -1,0 +1,39 @@
+entries:
+- title: sidebar
+  product: Vega in R tutorial
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
+
+  - title: Vega-lite landing page
+    output: web, pdf
+    folderitems:
+      - title: Vega-lite landing page
+        url: /vegalite_landing_page.html
+        output: web, pdf
+  - title: Creating static images
+    output: web, pdf
+    folderitems:
+    - title: A simple barchart
+      url: /vegalite-simplest-barchart.html
+      output: web, pdf
+    - title: Vega-Lite online editor
+      url: /vegalite-vegalite-online-editor.html
+      output: web, pdf
+    - title: Setting colour and shape
+      url: /vegalite-setting-colour-and-shape.html
+      output: web, pdf
+    - title: Changing the data
+      url: /vegalite-changing-the-data.html
+      output: web, pdf
