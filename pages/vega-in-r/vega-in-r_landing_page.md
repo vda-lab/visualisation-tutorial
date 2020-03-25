@@ -1,14 +1,14 @@
 ---
-title: Installation
+title: Vega in R
 keywords: vega-in-r
 sidebar: vega-in-r_sidebar
-permalink: /vega-in-r-installation.html
+toc: false
+permalink: vega-in-r_landing_page.html
 folder: vega-in-r
 series: vega-in-r-series
-weight: 1
+weight: 0
 ---
 
-Setting things up - to be updated...
-
+To be updated ...
 
 {% include custom/series_vega-in-r_next.html %}
