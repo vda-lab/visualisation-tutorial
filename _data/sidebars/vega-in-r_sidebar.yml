@@ -1,0 +1,79 @@
+entries:
+- title: sidebar
+  product: Vega in R tutorial
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
+
+  - title: Vega in R landing page
+    output: web, pdf
+    folderitems:
+    - title: Vega in R landing page
+      url: /vega-in-r_landing_page.html
+      output: web, pdf
+    - title: Setting things up
+      url: /vega-in-r-setting-things-up.html
+      output: web, pdf
+  - title: Creating static images
+    output: web, pdf
+    folderitems:
+    - title: A simple barchart
+      url: /vega-in-r-simple-barchart.html
+      output: web, pdf
+    - title: Changing the data
+      url: /vega-in-r-changing-data.html
+      output: web, pdf
+  - title: Simple Interaction
+    output: web, pdf
+    folderitems:
+    - title: Simple interaction
+      url: /vega-in-r-simple-interaction.html
+      output: web, pdf
+  - title: Transforms
+    output: web, pdf
+    folderitems:
+    - title: Field transform
+      url: /vega-in-r-field-transform.html
+      output: web, pdf
+    - title: Data transform
+      url: /vega-in-r-data-transformations.html
+      output: web, pdf
+  - title: Combine Charts
+    output: web, pdf
+    folderitems:
+    - title: Layered chart
+      url: /vega-in-r-layered-chart.html
+      output: web, pdf
+    - title: Concatenated chart
+      url: /vega-in-r-concatenated-chart.html
+      output: web, pdf
+    - title: Faceted chart
+      url: /vega-in-r-faceted-chart.html
+      output: web, pdf
+  - title: Brush and link
+    output: web, pdf
+    folderitems:
+    - title: Brush and link
+      url: /vega-in-r-brush-and-link.html
+      output: web, pdf
+  - title: Widgets
+    output: web, pdf
+    folderitems:
+    - title: Widgets for selections
+      url: /vega-in-r-widgets.html
+      output: web, pdf
+
+
+
+
