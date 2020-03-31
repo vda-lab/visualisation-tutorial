@@ -12,23 +12,23 @@ One of the main advantages to use the altair package is the fact that supports t
 
 ## Tooltip
 
-A tooltip can be added to the plot using `tooltip()` inside encode. For one variable displayed in the tooltip we can use:
+A tooltip can be added to the plot using `tooltip()` inside `encode()`. For one variable displayed in the tooltip we can use:
 
 ```R
 ...
-tooltip = "Variable_1"
+tooltip = "Variable_1:T"
 ...
 ```
 
-and for more than one variable, we can use the R function c() as illustrated below:
+and for more than one variable, we can use the R function `list()` or `c()` as illustrated below:
 
 ```R
 ...
-tooltip = c("Variable_1", "Variable_2")
+tooltip = c("Variable_1:T", "Variable_2:T")
 ...
 ```
 
-Mind that if you are importing the data from a url directly in the plot specification, you may need to specify the field type.
+Mind that if we are importing the data from a url directly in the plot specification, we may need to specify the field type. As shown above we may use ":T" for the type, where "T" may be `O` for orninal, `Q` for quantitative or `N` for nominal. Other types are `T` for temporal and `G` for goejson.
 
 
 <div id="vis6"></div>
@@ -107,11 +107,13 @@ Mind that if you are importing the data from a url directly in the plot specific
 We illustrate two ways of making a graph zoomable and pannable. The first one is by adding the `intreactive()` attribute, as illustrated below:
 
 ```R
-$interactive()
+chart = alt$Chart(data_source_subset)$
+   .....
+   $interactive()
 ```
 
 A second option is to specify the selection outside the plot code and then use it inside the `add_selection` attribute in the chart code.
-The second option is an interval selection using a scale binding. 
+The second option is an interval selection using a scale binding. For more information on selection types supported in altair you can refer to [altair.selection_interval reference](https://altair-viz.github.io/user_guide/generated/api/altair.selection_interval.html#altair.selection_interval)
 
 ```R
 selection = alt$selection_interval(bind='scales')
@@ -184,9 +186,6 @@ $add_selection(
 
 {:.exercise}
 **Exercise** - Make the time series plot of all natural distasters interactive, to get the graph illustrated above. Use both ways of making it zoomable and pannable.
-
-{:.exercise}
-**Exercise** - Go through the other selection types supported in altair. [https://altair-viz.github.io/user_guide/generated/api/altair.selection_interval.html#altair.selection_interval.html](https://altair-viz.github.io/user_guide/generated/api/altair.selection_interval.html#altair.selection_interval)
 
 
 {% include custom/series_vega-in-r_next.html %}

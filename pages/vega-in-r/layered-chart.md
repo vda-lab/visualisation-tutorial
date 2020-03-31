@@ -8,34 +8,39 @@ series: vega-in-r-series
 weight: 7
 ---
 
-We are now looking at how we can combine charts in one canvas in altair R. 
-First, we see a layered chart example. Each chart can be made separately and combined uisng the `+` operator: `chart_layer_1 + chart_layer_2`.
-Below, we make a chart that consist of a line layer and a point layer. The tooltip should be added to the top layer so that it is visible in the final chart.
+We are now looking at how we can combine charts in one canvas in altair R.
+ 
+First, we are discussing a layered chart example. Each chart can be made separately and combined uisng the `+` operator: `chart_layer_1 + chart_layer_2`.
+Below, we make a chart that consists of a line layer and a point layer. The tooltip should be added to the top layer so that it is visible in the final chart.
 
 ```R
 chart_disasters_L1 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q'
-  )$transform_filter(
-      alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
-  )$properties(
-    height=400,
-    width=600
-)
+    x = 'Year:O',
+    y = 'Deaths:Q'
+  )$
+  transform_filter(
+    alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
+  )$
+  properties(
+    height = 400,
+    width = 600
+  )
 
 chart_disasters_L2 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_point()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q',
+    x = 'Year:O',
+    y = 'Deaths:Q',
     tooltip = "Deaths:Q"
-  )$transform_filter(
+  )$
+  transform_filter(
     alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
-  )$properties(
-    height=400,
-    width=600
+  )$
+  properties(
+    height = 400,
+    width = 600
   )
 
 chart_disasters = (chart_disasters_L1 + chart_disasters_L2)
@@ -114,22 +119,22 @@ chart_disasters = (chart_disasters_L1 + chart_disasters_L2)
   vegaEmbed('#vis16', yourVlSpec);
 </script>
 
+<br/>
 
 To produce the same chart we may also follow the procedure below.
-Use the R code for `chart_disasters_L2` and then make the first layer using:
+Use the R code provided above for `chart_disasters_L2` and then make the first layer using:
 
 ```R
 chart_disasters_L1 = chart_disasters_L2$mark_line()
 ```
 
 Then superimpose the charts as before:
-
 ```R
 chart_disasters = (chart_disasters_L1 + chart_disasters_L2)
 ```
 
 {:.exercise}
-**Exercise** - Make a layered chart, with one layer for the bar mark and one for the text mark, to produce the chart below.
+**Exercise** - Make a layered chart, which consists of one layer for the bar mark and one for the text mark, to produce the chart below.
 
 
 

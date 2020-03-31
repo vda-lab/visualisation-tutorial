@@ -20,10 +20,10 @@ data_source_subset = subset(data_source, data_source$Entity == "All natural disa
 chart_disasters = alt$Chart(data_source_subset)$
   mark_bar()$
   encode(
-  alt$X("Year:Q", bin = TRUE),
-  y='sum(Deaths):Q',
-  tooltip = 'sum(Deaths):Q'
-)
+    x = alt$X("Year:Q", bin = TRUE),
+    y = 'sum(Deaths):Q',
+    tooltip = 'sum(Deaths):Q'
+  )
 ```
 
 <div id="vis8"></div>
@@ -68,6 +68,12 @@ chart_disasters = alt$Chart(data_source_subset)$
 };
   vegaEmbed('#vis8', yourVlSpec);
 </script>
+
+<br/>
+
+Mind the difference in the syntax here. We used the long form `x = alt$X()` so that we can specify the binning inside encoding. Other adjustments can be related to scale or axis.  
+
+<br/>
 
 {:.exercise}
 **Exercise** - Check the documentation of the binning parameters [https://altair-viz.github.io/user_guide/generated/core/altair.BinParams.html](https://altair-viz.github.io/user_guide/generated/core/altair.BinParams.html) and increase the value of the maximum number of bins.
@@ -117,13 +123,12 @@ chart_disasters = alt$Chart(data_source_subset)$
   vegaEmbed('#vis9', yourVlSpec);
 </script>
 
-
-{:.exercise}
-**Exercise** - Using `data_source_subset = subset(data_source, data_source$Entity != "All natural disasters")` make a line plot that shows the deaths from all natural disasters versus time.
+<br/>
 
 {:.exercise}
 **Exercise** - Using `data_source_subset = subset(data_source, data_source$Entity != "All natural disasters")` make a heatmap that shows the count of disasters per year, like the one below.
 
+<br/>
 
 <div id="vis10"></div>
 <script type="text/javascript">
@@ -199,19 +204,20 @@ chart_disasters = alt$Chart(data_source_subset)$
   vegaEmbed('#vis10', yourVlSpec);
 </script>
 
+<br/>
 
-Another filed transformation is the one that scales the original field domain to the range we specify. 
-For instance, we can transform a quantitative field using the log scale.
+Another filed transformation is the one that scales the original field domain to the custom range we specify. 
+For instance, we can transform a quantitative field using the log scale, as we can see below.
 
 
 ```R
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_bar()$encode(
     x = 'Entity:N',
-    alt$Y('sum(Deaths):Q', scale=alt$Scale(type='log'))
+    y = alt$Y('sum(Deaths):Q', scale=alt$Scale(type='log'))
   )$properties(
-    height=300,
-    width=600
+    height = 300,
+    width = 600
 ) 
 
 ```
@@ -250,6 +256,7 @@ chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-dataset
   vegaEmbed('#vis11', yourVlSpec);
 </script>
 
+<br/>
 
 Fortunately, not in all years from 1900 to 2017 all types of registered disasters occured. Did you notice that in 1904 there is no natural disaster registered? 
 Let's enrich the dataset in R with a variable for missing values based on the year.
@@ -269,7 +276,7 @@ rm(Year, Entity, data_mod) # remove objects that are not needed
 ```
 
 Now we can plot the full time series, and specify a custom color scale for the presence of absence of the year in the data.
-So, the domain of the data is `0` and `1` and the custom range is the two colors of our preference.
+So, the domain of the data is `0` for Non-Missing, `1` for Missing and the custom range is the two colors of our preference, here black and red.
 
 ```R
 domain_color = c("0", "1")
@@ -279,17 +286,18 @@ data_source_subset = subset(data_source_modified, data_source_modified$Entity ==
 
 chart_disasters = alt$Chart(data_source_subset)$
   mark_circle(
-    opacity=0.8,
+    opacity = 0.8,
     size = 50
   )$
   encode(
-    x='Year:O',
-    y='Deaths:Q',
-    color=alt$Color('Missing', scale=alt$Scale(domain=domain_color, range=range_color)),
+    x = 'Year:O',
+    y = 'Deaths:Q',
+    color = alt$Color('Missing', scale = alt$Scale(domain = domain_color, range = range_color)),
     tooltip = c("Year", "Deaths")
-  )$properties(
-    height=300,
-    width=600
+  )$
+  properties(
+    height = 300,
+    width = 600
   )$
   interactive()
 ```

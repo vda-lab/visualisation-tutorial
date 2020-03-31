@@ -1,39 +1,59 @@
 ---
-title: Faceted chart
+title: Using widgets for selection
 keywords: vega-in-r
 sidebar: vega-in-r_sidebar
-permalink: /vega-in-r-faceted-chart.html
+permalink: /vega-in-r-widgets.html
 folder: vega-in-r
 series: vega-in-r-series
-weight: 9
+weight: 11
 ---
 
-For faceting, we can use `facet` inside `$encode()`. The height and width we specify, refer to each individual plot. 
-If we do not specify the number of columns `columns = 3` all individual charts are concatenated horizontally.
-We also see that with the `facet` function, a title of each chart is automatically displayed for each level of the variable we are faceting.
+We have seen how to select datapoints with brushing and linking. We are now looking at how to select datapoints based on a variable, using widgets.
+In the example below, we make a layered time series chart in which we can select the natural disaster to be displayed form a dropdown list. In the default view, all time series are displayed.
+
+There are four steps to make this plot in altair R.
+- First, we make a list of the elements that will be included in the dropdown selection, using conventional R code. We make sure that the elements of the list match the names of the variable we want to filter.
+- Then, we create the chart, in the same way as we would make it if we have already filtered the data on one of the options included in the list above.
+- In the third step, we make a dynamic query for the dropdown menu. To do so, we create a single element selection `entities_select`. We specify the name of the field we want to filter in `fields = list()`. We use the `binding_select` to specify the input options for the dynamic query. Last, we give a name for the widget.
+- Finally, we modify the chart of step 2 by including the single selection we made in the previous step. We also include in the final chart a filter transform based on the dynamic query.
 
 ```R
-chart_disasters = alt$Chart(data_source_modified)$
-  mark_circle(
-    opacity = 0.8,
-    size = 20
-  )$
+# step 1
+entities = list("Drought", "Earthquake", "Epidemic", "Extreme temperature", "Extreme weather", "Flood", "Landslide", "Mass movement (dry)", "Volcanic activity", "Wildfire")
+  
+# step 2
+chart_a = alt$Chart(data_source_modified_subset)$
+  mark_line()$
   encode(
-    x = 'Year:O',
-    y = 'Missing:N',
-    color = 'Missing:N',
-    facet = alt$Facet('Entity:N', columns = 3),
-    tooltip = "Year:Q"
+    x = "Year:O",
+    y = "Deaths:Q",
+    tooltip = c("Year:N","Deaths:Q")
   )$
   properties(
-    width = 180,
-    height = 90
-  )$
-  interactive()
+    height = 300,
+    width = 700
+  )
+
+chart_b = chart_a$mark_circle(size = 50)$encode(x = "Year:O", y = "Deaths:Q", color = "Missing:N")
+
+chart = chart_b + chart_a
+
+# step 3
+entities_select = alt$selection_single(
+    fields = list("Entity"), 
+    bind = alt$binding_select(options = entities),
+    name = "Filter"
+  )
+
+# step 4
+chart_filter_entities = chart$
+  add_selection(entities_select)$
+  transform_filter(entities_select)
 ```
 
 
-<div id="vis19"></div>
+
+<div id="vis23"></div>
 <script type="text/javascript">
     var yourVlSpec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.0.0.json",
@@ -44,16 +64,10 @@ chart_disasters = alt$Chart(data_source_modified)$
     }
   },
   "data": {
-    "name": "data-bc4a679881a2f6c12b6dbb818d1a0f16"
+    "name": "data-d02ec9ea4f0e70c5889ed5d30c0a3014"
   },
   "datasets": {
-    "data-bc4a679881a2f6c12b6dbb818d1a0f16": [
-      {
-        "Deaths": 1267360,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1900
-      },
+    "data-d02ec9ea4f0e70c5889ed5d30c0a3014": [
       {
         "Deaths": 1261000,
         "Entity": "Drought",
@@ -113,12 +127,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1900
-      },
-      {
-        "Deaths": 200018,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1901
       },
       {
         "Deaths": 0,
@@ -181,12 +189,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1901
       },
       {
-        "Deaths": 46037,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1902
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -245,12 +247,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1902
-      },
-      {
-        "Deaths": 6506,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1903
       },
       {
         "Deaths": 0,
@@ -314,12 +310,6 @@ chart_disasters = alt$Chart(data_source_modified)$
       },
       {
         "Deaths": 0,
-        "Entity": "All natural disasters",
-        "Missing": "1",
-        "Year": 1904
-      },
-      {
-        "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
         "Year": 1904
@@ -377,12 +367,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1904
-      },
-      {
-        "Deaths": 22758,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1905
       },
       {
         "Deaths": 0,
@@ -445,12 +429,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1905
       },
       {
-        "Deaths": 42970,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1906
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -509,12 +487,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1906
-      },
-      {
-        "Deaths": 1325641,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1907
       },
       {
         "Deaths": 0,
@@ -577,12 +549,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1907
       },
       {
-        "Deaths": 75033,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1908
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -641,12 +607,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1908
-      },
-      {
-        "Deaths": 1511524,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1909
       },
       {
         "Deaths": 0,
@@ -709,12 +669,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1909
       },
       {
-        "Deaths": 148233,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1910
-      },
-      {
         "Deaths": 85000,
         "Entity": "Drought",
         "Missing": "0",
@@ -773,12 +727,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1910
-      },
-      {
-        "Deaths": 102408,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1911
       },
       {
         "Deaths": 0,
@@ -841,12 +789,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1911
       },
       {
-        "Deaths": 52093,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1912
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -905,12 +847,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1912
-      },
-      {
-        "Deaths": 882,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1913
       },
       {
         "Deaths": 0,
@@ -973,12 +909,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1913
       },
       {
-        "Deaths": 289,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1914
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1037,12 +967,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1914
-      },
-      {
-        "Deaths": 32167,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1915
       },
       {
         "Deaths": 0,
@@ -1105,12 +1029,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1915
       },
       {
-        "Deaths": 300,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1916
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1169,12 +1087,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1916
-      },
-      {
-        "Deaths": 2523507,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1917
       },
       {
         "Deaths": 0,
@@ -1237,12 +1149,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1917
       },
       {
-        "Deaths": 461113,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1918
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1303,12 +1209,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1918
       },
       {
-        "Deaths": 5500,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1919
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1367,12 +1267,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1919
-      },
-      {
-        "Deaths": 3204224,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1920
       },
       {
         "Deaths": 524000,
@@ -1436,12 +1330,6 @@ chart_disasters = alt$Chart(data_source_modified)$
       },
       {
         "Deaths": 1200000,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1921
-      },
-      {
-        "Deaths": 1200000,
         "Entity": "Drought",
         "Missing": "0",
         "Year": 1921
@@ -1499,12 +1387,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1921
-      },
-      {
-        "Deaths": 101243,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1922
       },
       {
         "Deaths": 0,
@@ -1567,12 +1449,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1922
       },
       {
-        "Deaths": 255701,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1923
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1631,12 +1507,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1923
-      },
-      {
-        "Deaths": 303009,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1924
       },
       {
         "Deaths": 0,
@@ -1699,12 +1569,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1924
       },
       {
-        "Deaths": 5832,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1925
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1763,12 +1627,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1925
-      },
-      {
-        "Deaths": 427852,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1926
       },
       {
         "Deaths": 0,
@@ -1831,12 +1689,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1926
       },
       {
-        "Deaths": 215160,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1927
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -1895,12 +1747,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1927
-      },
-      {
-        "Deaths": 3004895,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1928
       },
       {
         "Deaths": 3000000,
@@ -1963,12 +1809,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1928
       },
       {
-        "Deaths": 8377,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1929
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2027,12 +1867,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1929
-      },
-      {
-        "Deaths": 10572,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1930
       },
       {
         "Deaths": 0,
@@ -2095,12 +1929,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1930
       },
       {
-        "Deaths": 3706227,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1931
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2159,12 +1987,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1931
-      },
-      {
-        "Deaths": 73296,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1932
       },
       {
         "Deaths": 0,
@@ -2227,12 +2049,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1932
       },
       {
-        "Deaths": 34296,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1933
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2291,12 +2107,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1933
-      },
-      {
-        "Deaths": 21087,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1934
       },
       {
         "Deaths": 0,
@@ -2359,12 +2169,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1934
       },
       {
-        "Deaths": 272817,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1935
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2423,12 +2227,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1935
-      },
-      {
-        "Deaths": 5301,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1936
       },
       {
         "Deaths": 0,
@@ -2491,12 +2289,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1936
       },
       {
-        "Deaths": 12025,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1937
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2555,12 +2347,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1937
-      },
-      {
-        "Deaths": 2225,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1938
       },
       {
         "Deaths": 0,
@@ -2623,12 +2409,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1938
       },
       {
-        "Deaths": 563178,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1939
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2687,12 +2467,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1939
-      },
-      {
-        "Deaths": 23023,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1940
       },
       {
         "Deaths": 20000,
@@ -2755,12 +2529,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1940
       },
       {
-        "Deaths": 10195,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1941
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -2819,12 +2587,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1941
-      },
-      {
-        "Deaths": 1608235,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1942
       },
       {
         "Deaths": 1500000,
@@ -2887,12 +2649,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1942
       },
       {
-        "Deaths": 1910322,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1943
-      },
-      {
         "Deaths": 1900000,
         "Entity": "Drought",
         "Missing": "0",
@@ -2951,12 +2707,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1943
-      },
-      {
-        "Deaths": 15906,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1944
       },
       {
         "Deaths": 0,
@@ -3019,12 +2769,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1944
       },
       {
-        "Deaths": 10376,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1945
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3083,12 +2827,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1945
-      },
-      {
-        "Deaths": 35490,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1946
       },
       {
         "Deaths": 30000,
@@ -3151,12 +2889,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1946
       },
       {
-        "Deaths": 17647,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1947
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3215,12 +2947,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1947
-      },
-      {
-        "Deaths": 120131,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1948
       },
       {
         "Deaths": 0,
@@ -3283,12 +3009,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1948
       },
       {
-        "Deaths": 120370,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1949
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3347,12 +3067,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1949
-      },
-      {
-        "Deaths": 6728,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1950
       },
       {
         "Deaths": 0,
@@ -3415,12 +3129,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1950
       },
       {
-        "Deaths": 15042,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1951
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3479,12 +3187,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1951
-      },
-      {
-        "Deaths": 8965,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1952
       },
       {
         "Deaths": 0,
@@ -3547,12 +3249,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1952
       },
       {
-        "Deaths": 12956,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1953
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3611,12 +3307,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1953
-      },
-      {
-        "Deaths": 41872,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1954
       },
       {
         "Deaths": 0,
@@ -3679,12 +3369,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1954
       },
       {
-        "Deaths": 6026,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1955
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3743,12 +3427,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1955
-      },
-      {
-        "Deaths": 7737,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1956
       },
       {
         "Deaths": 0,
@@ -3811,12 +3489,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1956
       },
       {
-        "Deaths": 10603,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1957
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -3875,12 +3547,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1957
-      },
-      {
-        "Deaths": 3950,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1958
       },
       {
         "Deaths": 0,
@@ -3943,12 +3609,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1958
       },
       {
-        "Deaths": 2013242,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1959
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -4007,12 +3667,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1959
-      },
-      {
-        "Deaths": 39188,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1960
       },
       {
         "Deaths": 0,
@@ -4075,12 +3729,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1960
       },
       {
-        "Deaths": 17341,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1961
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -4139,12 +3787,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1961
-      },
-      {
-        "Deaths": 17370,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1962
       },
       {
         "Deaths": 0,
@@ -4207,12 +3849,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1962
       },
       {
-        "Deaths": 37746,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1963
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -4271,12 +3907,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1963
-      },
-      {
-        "Deaths": 12892,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1964
       },
       {
         "Deaths": 50,
@@ -4339,12 +3969,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1964
       },
       {
-        "Deaths": 1565517,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1965
-      },
-      {
         "Deaths": 1502000,
         "Entity": "Drought",
         "Missing": "0",
@@ -4403,12 +4027,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1965
-      },
-      {
-        "Deaths": 17181,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1966
       },
       {
         "Deaths": 8000,
@@ -4471,12 +4089,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1966
       },
       {
-        "Deaths": 10103,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1967
-      },
-      {
         "Deaths": 600,
         "Entity": "Drought",
         "Missing": "0",
@@ -4535,12 +4147,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1967
-      },
-      {
-        "Deaths": 21461,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1968
       },
       {
         "Deaths": 0,
@@ -4603,12 +4209,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1968
       },
       {
-        "Deaths": 11687,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1969
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -4667,12 +4267,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1969
-      },
-      {
-        "Deaths": 387507,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1970
       },
       {
         "Deaths": 0,
@@ -4735,12 +4329,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1970
       },
       {
-        "Deaths": 18086,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1971
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -4799,12 +4387,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1971
-      },
-      {
-        "Deaths": 20045,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1972
       },
       {
         "Deaths": 0,
@@ -4867,12 +4449,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1972
       },
       {
-        "Deaths": 110555,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1973
-      },
-      {
         "Deaths": 100000,
         "Entity": "Drought",
         "Missing": "0",
@@ -4931,12 +4507,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1973
-      },
-      {
-        "Deaths": 87504,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1974
       },
       {
         "Deaths": 19000,
@@ -4999,12 +4569,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1974
       },
       {
-        "Deaths": 14858,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1975
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -5063,12 +4627,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1975
-      },
-      {
-        "Deaths": 280469,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1976
       },
       {
         "Deaths": 0,
@@ -5131,12 +4689,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1976
       },
       {
-        "Deaths": 22406,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1977
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -5195,12 +4747,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1977
-      },
-      {
-        "Deaths": 38096,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1978
       },
       {
         "Deaths": 63,
@@ -5263,12 +4809,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1978
       },
       {
-        "Deaths": 7341,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1979
-      },
-      {
         "Deaths": 18,
         "Entity": "Drought",
         "Missing": "0",
@@ -5327,12 +4867,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "1",
         "Year": 1979
-      },
-      {
-        "Deaths": 23089,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1980
       },
       {
         "Deaths": 0,
@@ -5395,12 +4929,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1980
       },
       {
-        "Deaths": 119697,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1981
-      },
-      {
         "Deaths": 103000,
         "Entity": "Drought",
         "Missing": "0",
@@ -5459,12 +4987,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1981
-      },
-      {
-        "Deaths": 13973,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1982
       },
       {
         "Deaths": 280,
@@ -5527,12 +5049,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1982
       },
       {
-        "Deaths": 461561,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1983
-      },
-      {
         "Deaths": 450520,
         "Entity": "Drought",
         "Missing": "0",
@@ -5591,12 +5107,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1983
-      },
-      {
-        "Deaths": 16273,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1984
       },
       {
         "Deaths": 230,
@@ -5659,12 +5169,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1984
       },
       {
-        "Deaths": 60232,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1985
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -5723,12 +5227,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1985
-      },
-      {
-        "Deaths": 10349,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1986
       },
       {
         "Deaths": 84,
@@ -5791,12 +5289,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1986
       },
       {
-        "Deaths": 21533,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1987
-      },
-      {
         "Deaths": 1317,
         "Entity": "Drought",
         "Missing": "0",
@@ -5855,12 +5347,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1987
-      },
-      {
-        "Deaths": 57464,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1988
       },
       {
         "Deaths": 1600,
@@ -5923,12 +5409,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1988
       },
       {
-        "Deaths": 12611,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1989
-      },
-      {
         "Deaths": 237,
         "Entity": "Drought",
         "Missing": "0",
@@ -5987,12 +5467,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1989
-      },
-      {
-        "Deaths": 53141,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1990
       },
       {
         "Deaths": 0,
@@ -6055,12 +5529,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1990
       },
       {
-        "Deaths": 189707,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1991
-      },
-      {
         "Deaths": 2000,
         "Entity": "Drought",
         "Missing": "0",
@@ -6119,12 +5587,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1991
-      },
-      {
-        "Deaths": 18911,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1992
       },
       {
         "Deaths": 0,
@@ -6187,12 +5649,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1992
       },
       {
-        "Deaths": 21821,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1993
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -6251,12 +5707,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1993
-      },
-      {
-        "Deaths": 15590,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1994
       },
       {
         "Deaths": 0,
@@ -6319,12 +5769,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1994
       },
       {
-        "Deaths": 27166,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1995
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -6383,12 +5827,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1995
-      },
-      {
-        "Deaths": 31595,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1996
       },
       {
         "Deaths": 0,
@@ -6451,12 +5889,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1996
       },
       {
-        "Deaths": 30124,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1997
-      },
-      {
         "Deaths": 732,
         "Entity": "Drought",
         "Missing": "0",
@@ -6515,12 +5947,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1997
-      },
-      {
-        "Deaths": 62672,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1998
       },
       {
         "Deaths": 20,
@@ -6583,12 +6009,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 1998
       },
       {
-        "Deaths": 76886,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 1999
-      },
-      {
         "Deaths": 361,
         "Entity": "Drought",
         "Missing": "0",
@@ -6647,12 +6067,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 1999
-      },
-      {
-        "Deaths": 16667,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2000
       },
       {
         "Deaths": 80,
@@ -6715,12 +6129,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2000
       },
       {
-        "Deaths": 39493,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2001
-      },
-      {
         "Deaths": 99,
         "Entity": "Drought",
         "Missing": "0",
@@ -6779,12 +6187,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2001
-      },
-      {
-        "Deaths": 21342,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2002
       },
       {
         "Deaths": 588,
@@ -6847,12 +6249,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2002
       },
       {
-        "Deaths": 113558,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2003
-      },
-      {
         "Deaths": 9,
         "Entity": "Drought",
         "Missing": "0",
@@ -6911,12 +6307,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2003
-      },
-      {
-        "Deaths": 244772,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2004
       },
       {
         "Deaths": 80,
@@ -6979,12 +6369,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2004
       },
       {
-        "Deaths": 93566,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2005
-      },
-      {
         "Deaths": 149,
         "Entity": "Drought",
         "Missing": "0",
@@ -7043,12 +6427,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2005
-      },
-      {
-        "Deaths": 29893,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2006
       },
       {
         "Deaths": 134,
@@ -7111,12 +6489,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2006
       },
       {
-        "Deaths": 22422,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2007
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -7175,12 +6547,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2007
-      },
-      {
-        "Deaths": 242236,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2008
       },
       {
         "Deaths": 8,
@@ -7243,12 +6609,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2008
       },
       {
-        "Deaths": 16037,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2009
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -7307,12 +6667,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2009
-      },
-      {
-        "Deaths": 329900,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2010
       },
       {
         "Deaths": 20000,
@@ -7375,12 +6729,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2010
       },
       {
-        "Deaths": 34143,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2011
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -7439,12 +6787,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2011
-      },
-      {
-        "Deaths": 11619,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2012
       },
       {
         "Deaths": 0,
@@ -7507,12 +6849,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2012
       },
       {
-        "Deaths": 22225,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2013
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -7571,12 +6907,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2013
-      },
-      {
-        "Deaths": 20882,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2014
       },
       {
         "Deaths": 0,
@@ -7639,12 +6969,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2014
       },
       {
-        "Deaths": 23893,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2015
-      },
-      {
         "Deaths": 35,
         "Entity": "Drought",
         "Missing": "0",
@@ -7705,12 +7029,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Year": 2015
       },
       {
-        "Deaths": 10201,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2016
-      },
-      {
         "Deaths": 0,
         "Entity": "Drought",
         "Missing": "1",
@@ -7769,12 +7087,6 @@ chart_disasters = alt$Chart(data_source_modified)$
         "Entity": "Wildfire",
         "Missing": "0",
         "Year": 2016
-      },
-      {
-        "Deaths": 2087,
-        "Entity": "All natural disasters",
-        "Missing": "0",
-        "Year": 2017
       },
       {
         "Deaths": 0,
@@ -7838,57 +7150,194 @@ chart_disasters = alt$Chart(data_source_modified)$
       }
     ]
   },
+"layer": [
+    {
+      "encoding": {
+        "color": {
+          "field": "Missing",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "nominal"
+          },
+          {
+            "field": "Deaths",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Deaths",
+          "type": "quantitative"
+        }
+      },
+      "height": 300,
+      "mark": {
+        "size": 50,
+        "type": "circle"
+      },
+      "selection": {
+        "Filter": {
+          "bind": {
+            "input": "select",
+            "options": [
+              "Drought",
+              "Earthquake",
+              "Epidemic",
+              "Extreme temperature",
+              "Extreme weather",
+              "Flood",
+              "Landslide",
+              "Mass movement (dry)",
+              "Volcanic activity",
+              "Wildfire"
+            ]
+          },
+          "fields": [
+            "Entity"
+          ],
+          "type": "single"
+        }
+      },
+      "width": 700
+    },
+    {
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "nominal"
+          },
+          {
+            "field": "Deaths",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Deaths",
+          "type": "quantitative"
+        }
+      },
+      "height": 300,
+      "mark": "line",
+      "width": 700
+    }
+  ],
+  "transform": [
+    {
+      "filter": {
+        "selection": "Filter"
+      }
+    }
+  ]
+};
+  vegaEmbed('#vis23', yourVlSpec);
+</script>
+
+
+<br/>
+
+For more information you may refer to the [reference for selection_single](https://altair-viz.github.io/user_guide/generated/api/altair.selection_single.html) and to the [guide on binding](https://altair-viz.github.io/user_guide/interactions.html#binding-adding-data-driven-inputs)
+The [vega-lite documentation for selections](https://vega.github.io/vega-lite/docs/selection.html) may also be useful.
+
+<br/>
+
+{:.exercise}
+**Exercise** - Make a normalized stacked area chart of Deaths versus Year for `Epidemic`, `Extreme temperature`, `Extreme weather` and `Flood`. Include a radio button that allow you to highlight one type of disaster at a time. The end result should look like the chart below. Hint: Use `binding_radio`.
+
+
+<div id="vis24"></div>
+<script type="text/javascript">
+    var yourVlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.0.0.json",
+  "config": {
+    "view": {
+      "continuousHeight": 300,
+      "continuousWidth": 400
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv"
+  },
   "encoding": {
     "color": {
-      "field": "Missing",
-      "type": "nominal"
+      "condition": {
+        "field": "Entity",
+        "selection": "Select",
+        "type": "nominal"
+      },
+      "value": "white"
     },
-    "facet": {
-      "columns": 3,
-      "field": "Entity",
-      "type": "nominal"
-    },
-    "tooltip": {
-      "field": "Year",
-      "type": "quantitative"
-    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal"
+      },
+      {
+        "field": "Deaths",
+        "type": "quantitative"
+      },
+      {
+        "field": "Entity",
+        "type": "nominal"
+      }
+    ],
     "x": {
       "field": "Year",
       "type": "ordinal"
     },
     "y": {
-      "field": "Missing",
-      "type": "nominal"
+      "field": "Deaths",
+      "stack": "normalize",
+      "type": "quantitative"
     }
   },
-  "height": 90,
-  "mark": {
-    "opacity": 0.8,
-    "size": 20,
-    "type": "circle"
-  },
+  "height": 300,
+  "mark": "area",
   "selection": {
-    "selector020": {
-      "bind": "scales",
-      "encodings": [
-        "x",
-        "y"
+    "Select": {
+      "bind": {
+        "input": "radio",
+        "options": [
+          "Epidemic",
+          "Extreme temperature",
+          "Extreme weather",
+          "Flood"
+        ]
+      },
+      "fields": [
+        "Entity"
       ],
-      "type": "interval"
+      "type": "single"
     }
   },
-  "width": 180
+  "transform": [
+    {
+      "filter": {
+        "field": "Entity",
+        "oneOf": [
+          "Epidemic",
+          "Extreme temperature",
+          "Extreme weather",
+          "Flood"
+        ]
+      }
+    }
+  ],
+  "width": 700
 };
-  vegaEmbed('#vis19', yourVlSpec);
+  vegaEmbed('#vis24', yourVlSpec);
 </script>
 
-<br/>
-
-{:.exercise}
-**Exercise** - Make a faceted chart for the time series per natural disaster.
-
-{:.exercise}
-**Exercise** - What is the problem with the chart made above and how could you remake it without using `facet`?
 
 
 {% include custom/series_vega-in-r_next.html %}

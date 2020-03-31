@@ -1,5 +1,5 @@
 ---
-title: Data Transformations
+title: Data Transform
 keywords: vega-in-r
 sidebar: vega-in-r_sidebar
 permalink: /vega-in-r-data-transformations.html
@@ -15,15 +15,17 @@ So far, we have been filtering the data in R and then using the modified data in
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x='Year:Q',
-    y='Deaths:Q',
+    x = 'Year:Q',
+    y = 'Deaths:Q',
     tooltip = c("Year", "Deaths")
-  )$properties(
-    height=300,
-    width=600
-  )$transform_filter(
+  )$
+  properties(
+    height = 300,
+    width = 600
+  )$
+  transform_filter(
    alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
-)
+  )
 ```
 
 <div id="vis13"></div>
@@ -64,9 +66,13 @@ chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-dataset
   vegaEmbed('#vis13', yourVlSpec);
 </script>
 
+<br/>
+
+We use the field predicates to assess whether a data point satisfied certain conditions. As mentioned in the [field predicates reference](https://altair-viz.github.io/user_guide/transform/filter.html#field-predicates) the `FieldEqualPredicate` evaluates whether a field is equal to a particular value. The variable is the first argument and the condition is the second argument. Go through the field predicates altair documentation and [vega-lite documentation](https://vega.github.io/vega-lite/docs/predicate.html#field-predicate) and use the `FieldOneOfPredicate` for the exercise below.
+
 
 {:.exercise}
-**Exercise** - Use the filter transform to obtain the data related to volcanic activity and earthquake and make an area chart like the one below. Hint: Go through the documentation for Field Predicates at [https://altair-viz.github.io/user_guide/transform/filter.html#user-guide-filter-transform](https://altair-viz.github.io/user_guide/transform/filter.html#user-guide-filter-transform).
+**Exercise** - Use the filter transform to obtain the data related to volcanic activity and earthquake and make an area chart like the one below.
 
 <div id="vis14"></div>
 <script type="text/javascript">
@@ -113,23 +119,28 @@ chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-dataset
   vegaEmbed('#vis14', yourVlSpec);
 </script>
 
-We now also use the `transform_window()` to compute and plot a windowed aggregation of the deaths over all available years.
+<br/>
+
+We now also use the `transform_window()` for data transformation to compute and plot a windowed aggregation of the deaths over all available years.
 
 
 ```R
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   transform_window(
   cumulative_count='sum(Deaths)'
-)$mark_area()$encode(
-  x='Year:O',
-  y='cumulative_count:Q',
-  tooltip = c("Year:Q", 'cumulative_count:Q')
-)$transform_filter(
-   alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
-)$properties(
-  height=300,
-  width=600
-)
+  )$
+  mark_area()$
+  encode(
+    x = 'Year:O',
+    y = 'cumulative_count:Q',
+    tooltip = c("Year:Q", 'cumulative_count:Q')
+  )$transform_filter(
+    alt$FieldEqualPredicate(field = "Entity", equal = "All natural disasters")
+  )$
+  properties(
+    height = 300,
+    width = 600
+  )
 ```
 
 <div id="vis15"></div>

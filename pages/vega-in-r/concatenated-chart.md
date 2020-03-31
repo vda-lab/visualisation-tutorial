@@ -17,58 +17,70 @@ To specify a title in each plot, we use `title = 'The Title'` inside `$propertie
 chart_disasters_1 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q',
+    x = 'Year:O',
+    y = 'Deaths:Q',
     tooltip = 'Deaths:Q'
-  )$transform_filter(
+  )$
+  transform_filter(
     alt$FieldEqualPredicate(field = "Entity", equal = "Landslide")
-  )$properties(
-    width=400,
-    height=200,
-    title='Landslide'
-  )$interactive()
+  )$
+  properties(
+    width = 400,
+    height = 200,
+    title = 'Landslide'
+  )$
+  interactive()
 
 chart_disasters_2 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q',
+    x = 'Year:O',
+    y = 'Deaths:Q',
     tooltip = 'Deaths:Q'
-  )$transform_filter(
+  )$
+  transform_filter(
     alt$FieldEqualPredicate(field = "Entity", equal = "Volcanic activity")
-  )$properties(
-    width=400,
-    height=200,
-    title='Volcanic activity'
-  )$interactive()
+  )$
+  properties(
+    width = 400,
+    height = 200,
+    title = 'Volcanic activity'
+  )$
+  interactive()
 
 chart_disasters_3 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q',
+    x = 'Year:O',
+    y = 'Deaths:Q',
     tooltip = 'Deaths:Q'
-  )$transform_filter(
+  )$
+  transform_filter(
     alt$FieldEqualPredicate(field = "Entity", equal = "Wildfire")
-  )$properties(
-    width=400,
-    height=200,
-    title='Wildfire'
-  )$interactive()
+  )$
+  properties(
+    width = 400,
+    height = 200,
+    title = 'Wildfire'
+  )$
+  interactive()
 
 chart_disasters_4 = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   mark_line()$
   encode(
-    x ='Year:O',
-    y ='Deaths:Q',
+    x = 'Year:O',
+    y = 'Deaths:Q',
     tooltip = 'Deaths:Q'
-  )$transform_filter(
+  )$
+  transform_filter(
     alt$FieldEqualPredicate(field = "Entity", equal = "Mass movement (dry)")
-  )$properties(
-    width=400,
-    height=200,
-    title='Mass movement (dry)'
-  )$interactive()
+  )$
+  properties(
+    width = 400,
+    height = 200,
+    title = 'Mass movement (dry)'
+  )$
+  interactive()
 
 chart_combined = (chart_disasters_1 | chart_disasters_2) & (chart_disasters_3 | chart_disasters_4)
 ```
