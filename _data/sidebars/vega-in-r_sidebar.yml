@@ -19,14 +19,11 @@ entries:
   - title: Vega in R landing page
     output: web, pdf
     folderitems:
-      - title: Vega-lite landing page
-        url: /vega-in-r_landing_page.html
-        output: web, pdf
-  - title: Setting things up
-    output: web, pdf
-    folderitems:
-    - title: Installation
-      url: /vega-in-r-installation.html
+    - title: Vega in R landing page
+      url: /vega-in-r_landing_page.html
+      output: web, pdf
+    - title: Setting things up
+      url: /vega-in-r-setting-things-up.html
       output: web, pdf
   - title: Creating static images
     output: web, pdf
@@ -70,7 +67,12 @@ entries:
     - title: Brush and link
       url: /vega-in-r-brush-and-link.html
       output: web, pdf
-
+  - title: Widgets
+    output: web, pdf
+    folderitems:
+    - title: Widgets for selections
+      url: /vega-in-r-widgets.html
+      output: web, pdf
 
 
 
