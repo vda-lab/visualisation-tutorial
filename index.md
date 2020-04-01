@@ -64,3 +64,4 @@ That's the preamble finished. Let's start with...
 * [Vega-Lite]({{ site.baseurl }}/vegalite_landing_page.html)
 * [Vega]({{ site.baseurl }}/vega_landing_page.html)
 * [Holoviz]({{ site.baseurl }}/holoviz_landing_page.html)
+* [Vega in R]({{ site.baseurl }}/vega-in-r_landing_page.html)
