@@ -17,3 +17,6 @@ entries:
     - title: HoloViz
       url: /holoviz_landing_page.html
       output: web
+    - title: Vega in R
+      url: /vega-in-r_landing_page.html
+      output: web 

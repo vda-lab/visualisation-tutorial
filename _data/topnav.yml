@@ -18,3 +18,5 @@ topnav_dropdowns:
           url: /vega_landing_page.html
         - title: HoloViz
           url: /holoviz_landing_page.html
+        - title: Vega in R
+          url: /vega-in-r_landing_page.html
