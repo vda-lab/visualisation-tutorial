@@ -28,7 +28,7 @@ tooltip = c("Variable_1:T", "Variable_2:T")
 ...
 ```
 
-Mind that if we are importing the data from a url directly in the plot specification, we may need to specify the field type. As shown above we may use ":T" for the type, where "T" may be `O` for orninal, `Q` for quantitative or `N` for nominal. Other types are `T` for temporal and `G` for goejson.
+Mind that if we are importing the data from a url directly in the plot specification, we may need to specify the field type. As shown above we may use "T" for the type, where "T" may be for instance `O` for orninal, `Q` for quantitative or `N` for nominal.
 
 
 <div id="vis6"></div>

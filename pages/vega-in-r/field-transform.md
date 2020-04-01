@@ -71,7 +71,7 @@ chart_disasters = alt$Chart(data_source_subset)$
 
 <br/>
 
-Mind the difference in the syntax here. We used the long form `x = alt$X()` so that we can specify the binning inside encoding. Other adjustments can be related to scale or axis.  
+Mind the difference in the syntax here. We used the long form `x = alt$X()`, we have seen in the simple barchart section, so that we can specify the binning inside encoding. Other adjustments can be related to scale or axis.  
 
 <br/>
 
@@ -212,14 +212,15 @@ For instance, we can transform a quantitative field using the log scale, as we c
 
 ```R
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
-  mark_bar()$encode(
+  mark_bar()$
+  encode(
     x = 'Entity:N',
     y = alt$Y('sum(Deaths):Q', scale=alt$Scale(type='log'))
-  )$properties(
+  )$
+  properties(
     height = 300,
     width = 600
-) 
-
+  ) 
 ```
 
 <div id="vis11"></div>
@@ -279,20 +280,21 @@ Now we can plot the full time series, and specify a custom color scale for the p
 So, the domain of the data is `0` for Non-Missing, `1` for Missing and the custom range is the two colors of our preference, here black and red.
 
 ```R
-domain_color = c("0", "1")
+domain_var = c("0", "1")
 range_color = c('black', 'red')
+range_size = c(50, 150)
 
 data_source_subset = subset(data_source_modified, data_source_modified$Entity == "All natural disasters")
 
 chart_disasters = alt$Chart(data_source_subset)$
   mark_circle(
-    opacity = 0.8,
-    size = 50
+    opacity = 0.8
   )$
   encode(
     x = 'Year:O',
     y = 'Deaths:Q',
-    color = alt$Color('Missing', scale = alt$Scale(domain = domain_color, range = range_color)),
+    color = alt$Color('Missing', scale = alt$Scale(domain = domain_var, range = range_color)),
+    size = alt$Size('Missing', scale = alt$Scale(domain = domain_var, range = range_size)),
     tooltip = c("Year", "Deaths")
   )$
   properties(
@@ -1043,6 +1045,20 @@ chart_disasters = alt$Chart(data_source_subset)$
       },
       "type": "nominal"
     },
+    "size": {
+      "field": "Missing",
+      "scale": {
+        "domain": [
+          "0",
+          "1"
+        ],
+        "range": [
+          50,
+          150
+        ]
+      },
+      "type": "nominal"
+    },
     "tooltip": [
       {
         "field": "Year",
@@ -1065,11 +1081,10 @@ chart_disasters = alt$Chart(data_source_subset)$
   "height": 300,
   "mark": {
     "opacity": 0.8,
-    "size": 50,
     "type": "circle"
   },
   "selection": {
-    "selector033": {
+    "selector005": {
       "bind": "scales",
       "encodings": [
         "x",

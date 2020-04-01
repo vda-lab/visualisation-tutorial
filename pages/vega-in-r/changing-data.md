@@ -123,12 +123,12 @@ Below is the code to make this plot.
 ```R
 data_source_subset = subset(data_source, data_source$Entity != "All natural disasters") 
 
-chart_disasters = 
-  alt$Chart(data_source_subset)$
+chart_disasters = alt$Chart(data_source_subset)$
   mark_circle(
     opacity=0.8,
     stroke='black',
-    strokeWidth=1)$
+    strokeWidth=1
+  )$
   encode(
     x = "Year:O",
     y = "Entity:N",
@@ -145,15 +145,13 @@ Using the mark type `rect` with `color` and `opacity` channels we can make a hea
 
 
 ```R
-chart_disasters_2 = 
-  alt$Chart(data_source_subset)$
+chart_disasters = alt$Chart(data_source_subset)$
   mark_rect()$
   encode(
     x = "Entity:O",
     y = "Year:O",
     color = "Entity:N",
-    opacity = 'Deaths:Q',
-    tooltip = c("Year:O", "Deaths:Q")
+    opacity = 'Deaths:Q'
   )$
   properties(
     height=600,
@@ -281,9 +279,6 @@ chart_disasters = alt$Chart(data_source_subset)$
 
 {:.exercise}
 **Exercise** - Change the field types. What is the result?
-
-{:.exercise}
-**Exercise** - Make a barchart for total Deaths per Entity. Hint: You may do the calculation in R or try a calculation inside encoding.
 
 
 {% include custom/series_vega-in-r_next.html %}

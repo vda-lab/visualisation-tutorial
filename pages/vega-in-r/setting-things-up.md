@@ -34,12 +34,12 @@ install.packages("reticulate")
 reticulate::use_condaenv("r-reticulate")
 ```
 
-Restart R studio and then install the altair package:
+Restart Rstudio and then install the altair package:
 ``` R
 install.packages("altair")
 ```
 
-In R studio, use the code below to install the Python packages altair and vega_datasets:
+In Rstudio, use the code below to install the Python packages altair and vega_datasets:
 ``` R
 altair::install_altair()
 ```

@@ -127,7 +127,7 @@ We now also use the `transform_window()` for data transformation to compute and 
 ```R
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
   transform_window(
-  cumulative_count='sum(Deaths)'
+    cumulative_count='sum(Deaths)'
   )$
   mark_area()$
   encode(

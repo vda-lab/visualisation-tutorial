@@ -7185,7 +7185,7 @@ If we now make a second chart that inherits all the properties of the first char
 chart_2a = chart_1$properties(width = 300, height = 300)
 chart_2b = chart_2a$encode(x = "Entity:N")
 
-chart_distasters = (chart_2a | chart_2b)
+chart_disasters = (chart_2a | chart_2b)
 ```
 
 <div id="vis21"></div>
@@ -14358,7 +14358,7 @@ chart_distasters = (chart_2a | chart_2b)
 <br/>
 
 {:.exercise}
-**Exercise** - Make a one-way brushable and linkable chart of the deaths versus time per entity. The interval selection appears in a barchart below.
+**Exercise** - Make a one-way brushable and linkable chart of the deaths versus time per entity. The interval selection appears in a barchart below. Hint: Check the [altair R gallery of interactive charts](https://vegawidget.github.io/altair/articles/example-gallery-08-interactive-charts.html)
 
 
 <div id="vis22"></div>
