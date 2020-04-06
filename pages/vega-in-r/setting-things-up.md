@@ -9,9 +9,10 @@ weight: 1
 ---
 
 To get this tutorial started, we need, first, to install anaconda, and second, activate an r-reticulate environment using conda. We also need to install vega_datasets using pip and finally, install the R packages reticulate and altair using install.packages() in Rstudio. 
-Most of the steps described here are taken from [altair R installation](https://vegawidget.github.io/altair/articles/installation.html).
+Most of the steps described here are taken from [altair R installation](https://vegawidget.github.io/altair/articles/installation.html). Make sure you are using Python version 3.5 or higher to comply to the system requirements of the altair R package [altair CRAN](https://cran.r-project.org/web/packages/altair/altair.pdf).
 
-After installing Anaconda, open the Anaconda Prompt. Update conda:
+First, [install Anaconda](https://www.anaconda.com/distribution/) and after installing Anaconda, open the Anaconda Prompt. 
+Update conda:
 ``` C
 conda -V
 conda update conda
@@ -49,6 +50,8 @@ Verify the installation using:
 altair::check_altair()
 ```
 
+If there is no error on the verification, we are ready to start!
+<br/>
 The procedure described above should be run only in the beginning. The following times you want to use altair in Rstudio, you only need to call `library("altair")`.
 
 

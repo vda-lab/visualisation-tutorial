@@ -8,7 +8,7 @@ series: vega-in-r-series
 weight: 7
 ---
 
-We are now looking at how we can combine charts in one canvas in altair R.
+We are now looking at how we can combine charts in one canvas in altair R. This section on how to combine charts, is based on the [View Composition article](https://vegawidget.github.io/altair/articles/view-composition.html).
  
 First, we are discussing a layered chart example. Each chart can be made separately and combined uisng the `+` operator: `chart_layer_1 + chart_layer_2`.
 Below, we make a chart that consists of a line layer and a point layer. The tooltip should be added to the top layer so that it is visible in the final chart.

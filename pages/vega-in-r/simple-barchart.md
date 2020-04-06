@@ -93,14 +93,16 @@ chart_1 = alt$Chart(dataset)$
   )
 ```
 
-What is the syntax in altair R? It is similar to the altair Python with the major difference the usage of the operator `$` to access attributes, instead of `.`. We should note that there are some other differences of the Python and the R package described at the [Field Guide to Python Issues](https://vegawidget.github.io/altair/articles/field-guide-python.html) together with examples.
-We should also notice that we use the object `alt` to access the Altair API and create a chart using `alt$Chart`.
+What is the syntax in altair R? It is similar to the altair Python with the major difference the usage of the operator `$` to access attributes, instead of `.`. We should note that there are some other differences of the Python and the R package described at the [Field Guide to Python Issues](https://vegawidget.github.io/altair/articles/field-guide-python.html) together with examples. Below, are the most common properties of the chart syntax:
+- We first need to use the object `alt` to access the Altair API and create a chart using `alt$Chart`.
 - The `data` to be visualised is called inside the `alt$Chart`.
 - The `mark` used is specifed after `mark_`. Values as properties of the marks, for instance a hard-coded size or color, can be specified here.
 - The `encode` determines the mapping between the channels and the data fields. The encoding that is dependent on the fields is specified here, not the encoding that has to do with values of the marks. Here, `x` and `y` are the position channels. The field type is specified after the field name. `O` stands for ordinal and `Q` for quantitative. Other types are `N` for nominal, `T` for temporal and `G` for goejson. The `x = "Var1:O"` is the short form of `x = alt$X("Var1", type = "ordinal")`. The two forms are equivalent but the long form is used when doing more adjustments unside encoding. We will see an example in the field transform section.
 - The height and width of the plot is specified inside `properties`.
 
-To display the chart in Rstudio `vegawidget(chart_1)` or `chart_1` will not work. We can instead save the chart using:
+For more detailed references in Altair classes and functions, we may look to the [API reference](https://altair-viz.github.io/user_guide/API.html).
+
+Now, to display the chart in Rstudio we may use `vegawidget(chart_1)` or `chart_1`. Alternatively, we can also save the chart using:
 ```R
 htmlwidgets::saveWidget(vegawidget(chart_1),'chart_1.html')
 ```

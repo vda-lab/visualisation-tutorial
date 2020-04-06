@@ -8,8 +8,8 @@ series: vega-in-r-series
 weight: 6
 ---
 
-As mentioned in the documentation of altair, [https://altair-viz.github.io/user_guide/transform/index.html](https://altair-viz.github.io/user_guide/transform/index.html) in most cases, it is suggested to perform transformations outside the chart definition, so in our case using R. Of course, data transforms inside the chart can also be useful in some cases.
-So far, we have been filtering the data in R and then using the modified data in the chart specification. Now, we use the `transform_filter()` to subset the data inside the chart. We make the linechart we have seen in a previous section using the code below:
+As mentioned in the [data transformations documentation](https://altair-viz.github.io/user_guide/transform/index.html) of altair, in most cases, it is suggested to perform transformations outside the chart definition, so in our case using R. Of course, data transforms inside the chart can also be useful in some cases.
+So far, we have been filtering the data in R and then using the modified data in the chart specification. Now, we use the `transform_filter()` to subset the data inside the chart. [Here](https://altair-viz.github.io/user_guide/transform/filter.html#user-guide-filter-transform) is the filter transfrom documentation. We make the linechart we have seen in a previous section using the code below:
 
 ```R
 chart_disasters = alt$Chart("https://raw.githubusercontent.com/vega/vega-datasets/master/data/disasters.csv")$
@@ -121,7 +121,7 @@ We use the field predicates to assess whether a data point satisfied certain con
 
 <br/>
 
-We now also use the `transform_window()` for data transformation to compute and plot a windowed aggregation of the deaths over all available years.
+We now also use the `transform_window()` for data transformation to compute and plot a windowed aggregation of the deaths over all available years. [Here](https://altair-viz.github.io/user_guide/transform/window.html#user-guide-window-transform) is the window transform documentation.
 
 
 ```R

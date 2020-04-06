@@ -12,7 +12,7 @@ One of the main advantages to use the altair package is the fact that supports t
 
 ## Tooltip
 
-A tooltip can be added to the plot using `tooltip()` inside `encode()`. For one variable displayed in the tooltip we can use:
+A tooltip can be added to the plot using `tooltip()` inside `encode()` [altair R tooltips](https://vegawidget.github.io/altair/articles/tooltips.html). For one variable displayed in the tooltip we can use:
 
 ```R
 ...
@@ -29,7 +29,7 @@ tooltip = c("Variable_1:T", "Variable_2:T")
 ```
 
 Mind that if we are importing the data from a url directly in the plot specification, we may need to specify the field type. As shown above we may use "T" for the type, where "T" may be for instance `O` for orninal, `Q` for quantitative or `N` for nominal.
-
+We may also use the long form `alt$Tooltip(field = "Entity", type = "nominal")` and get the same result, or modify the tooltip specifying for instance a title, using `alt$Tooltip(field = "Entity", type = "nominal", title = "Disaster")`.
 
 <div id="vis6"></div>
 <script type="text/javascript">
