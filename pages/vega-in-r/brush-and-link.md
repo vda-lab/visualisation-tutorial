@@ -8,8 +8,8 @@ series: vega-in-r-series
 weight: 10
 ---
 
-We have seen how to concatenate charts, we may now see how to connect them interactively.  
-- To do so, we first create a static chart using the step 1 of the code below. 
+We have seen how to concatenate charts, we may now see how to connect them interactively. The steps described here are based on the [Interactive Examples article](https://vegawidget.github.io/altair/articles/interactive.html). 
+- To get started, we create a static chart using the step 1 of the code below. 
 - The second step is to add a selection. Here we add a selection of type `interval` but a selection can also be `single` or `multi` [altair.selection reference](https://altair-viz.github.io/user_guide/generated/api/altair.selection.html?highlight=selection#altair.selection). In step 2, we also name the selection 'brush' and we update the static chart by including the selection function.
 - Finally, in step 3, we update the color encoding of the data, so that every time the chart is brused the data inside the selection are colored, based on the nominal variable `Missing`, and the rest are colored lightgray. 
 

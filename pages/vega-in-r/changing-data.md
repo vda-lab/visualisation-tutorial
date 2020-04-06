@@ -9,12 +9,12 @@ weight: 3
 ---
 Let's now use a more realistic example and visualize a dataset included in the `vega_datasets` package [https://github.com/vega/vega-datasets.html](https://github.com/vega/vega-datasets.html).
 
-You can import the vega datasets using the altair library.
+We can import the vega datasets using the altair library.
 ```R
 vega_data = altair::import_vega_data()
 ```
 
-See the list of the available datasets
+Check out the list of the available datasets:
 ```R
 vega_data$list_datasets()
 ```
@@ -71,7 +71,7 @@ head(data_source); tail(data_source)
 ```
 
 We can now make an altair R plot similar to the one at altair Python [https://altair-viz.github.io/gallery/natural_disasters.html](https://altair-viz.github.io/gallery/natural_disasters.html)
-For now, we may filter the data in R and use the subset of the data to make the chart. On the data transform section we will see how to do the filtering inside the altair chart specification.
+For now, we may filter the data in R and use the subset of the data to make the chart. On the data transform section we will see how to do the filtering inside the chart specification.
 
 <br/>
 
@@ -140,7 +140,7 @@ chart_disasters = alt$Chart(data_source_subset)$
     width=500
   )
 ```
-The global properties of the circles are specified inside the mark attribute and the properties that depend on the data inside the encoding.
+Here, the global properties of the circles are specified inside the mark attribute while the properties that depend on the data inside the encoding.
 Using the mark type `rect` with `color` and `opacity` channels we can make a heatmap plot. 
 
 
