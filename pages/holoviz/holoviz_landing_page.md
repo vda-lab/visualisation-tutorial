@@ -25,4 +25,6 @@ We'll be using _Panel_ and _Param_ in this tutorial, within the context of [jupy
 
 Much of this tutorial is based on the excellent tutorial given by James Bednar available at [https://www.youtube.com/watch?v=7deGS4IPAQ0](https://www.youtube.com/watch?v=7deGS4IPAQ0).
 
+A live version of this tutorial is available [here](https://mybinder.org/v2/gh/jandot/test-holoviz/master).
+
 {% include custom/series_holoviz_next.html %}
